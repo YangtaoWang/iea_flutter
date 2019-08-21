@@ -1,0 +1,91 @@
+name: iea
+description: A new Flutter project.
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.2
+  dio: ^2.1.0
+  intro_slider: ^2.2.5
+  crypto: ^2.0.6
+  flutter_swiper: ^1.1.6
+  throttling: ^0.8.0
+  fluttertoast: ^3.1.0
+  video_player: ^0.10.1+4
+  chewie: ^0.9.7
+  flutter_downloader: ^1.1.7
+  path_provider: 1.1.2
+  permission_handler: ^3.1.0
+  progress_dialog: ^1.1.0+1
+  toast: ^0.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+# The following section is specific to Flutter.
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+
+   - assets/images/minecoursepage/expired.png
+   - assets/images/sliderpage/photo_pencil.png
+   - assets/images/sliderpage/photo_ruler.png
+   - assets/images/sliderpage/photo_school.png
+   - assets/images/sliderpage/photo_museum.png
+   - assets/images/sliderpage/photo_coffee_shop.png
+
+   - assets/images/homepage/testimage.png
+   - assets/images/homepage/5731557994768_.piccopy@3x.png
+
+
+
+   - assets/images/homepage/Page1@2x.png
+   - assets/images/homepage/Page1@3x.png
+   - assets/images/homepage/Page1Copy2@2x.png
+   - assets/images/homepage/Page1Copy2@3x.png
+   - assets/images/homepage/Page1Copy4@2x.png
+   - assets/images/homepage/Page1Copy4@3x.png
+   - assets/images/homepage/Page1Copy6@2x.png
+   - assets/images/homepage/Page1Copy6@3x.png
+   - assets/images/courseExamPage/dialogTip.png
+   - assets/images/courseExamPage/dialogBg.png
+   - assets/images/courseExamPage/closeDialog.png
+   - assets/images/courseExamPage/examBoard.png
+   - assets/images/courseExamPage/boardHead.png
+   - assets/images/courseExamAnswerPage/resultBg2.png
+   - assets/images/courseExamAnswerPage/resultBg3.png
+   - assets/images/playerPage/teacherBg.png
+   - assets/images/playerPage/bgTop.png
+   - assets/images/playerPage/bgBottom.png
+   - assets/images/playerPage/download.png
+   - assets/images/playerPage/courseExam.png
+   - assets/images/playerPage/afterCourseExam1.png
+   - assets/images/playerPage/afterCourseExam2.png
+   - assets/images/playerPage/wenhao.png
+   
+  fonts:
+    - family: iconfont
+      fonts:
+      - asset: assets/iconfont/iconfont.ttf
