@@ -1,13 +1,8 @@
-import 'package:iea/redux/module1/state.dart';
-
-class AppState {
-  final CountState countState;
-  AppState({
-    this.countState
-  });
-  factory AppState.initial() {
-    return AppState(
-      countState: CountState.initState()
-    );
-  }
+import 'package:iea/redux/stateModule/authState.dart';
+import 'package:iea/redux/stateModule/countState.dart';
+/// 应用程序状态
+class AppState{
+  AuthState auth;     //登录
+  CountState count; //主页
+  AppState({this.count,this.auth});
 }

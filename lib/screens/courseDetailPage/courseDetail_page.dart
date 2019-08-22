@@ -6,7 +6,7 @@ import 'package:iea/utils/sign_util.dart';
 import 'package:iea/utils/date_util.dart';
 // import 'package:iea/redux/state.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:iea/redux/AppState.dart';
+import 'package:iea/redux/appState.dart';
 // import 'package:iea/widgets/error.dart';
 // import 'package:iea/widgets/loading.dart';
 class CourseDetailPage extends StatefulWidget{
@@ -96,12 +96,18 @@ class CourseDetailPageState extends State<CourseDetailPage>{
     //     }
     // );
     return Scaffold(
-      body: StoreConnector<AppState,int>(
-        converter: (store) => store.state.countState.count,
-        builder: (context, count) {
-          return Text(
-            count.toString(),
-            style: Theme.of(context).textTheme.display1,
+      body: StoreConnector<AppState, AppState>(
+        converter: (store) => store.state,
+        builder: (context, state) {
+          // return Text(
+          //   count.toString(),
+          //   style: Theme.of(context).textTheme.display1,
+          // );
+          return Column(
+            children: <Widget>[
+              Text(state.count.counter.toString()),
+              Text(state.auth.token)
+            ],
           );
         },
       )

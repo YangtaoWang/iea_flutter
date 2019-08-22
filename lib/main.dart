@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:iea/redux/state.dart';
 import 'package:iea/screens/courseDetailPage/courseDetail_page.dart';
 // import 'package:iea/screens/indexPage/index_page.dart';
 import 'package:iea/screens/mineCoursePage/mineCourse_page.dart';
@@ -10,8 +9,10 @@ import 'package:iea/screens/playerPage/player_page.dart';
 import 'package:iea/screens/minepage/mine_screen.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:iea/redux/AppState.dart';
-import 'package:iea/redux/AppReducer.dart';
+import 'package:iea/redux/index.dart';
+import 'package:iea/redux/appState.dart';
+// import 'package:iea/redux/AppState.dart';
+// import 'package:iea/redux/AppReducer.dart';
 // import 'package:iea/redux/reducer.dart';
 // import 'dart:developer';
 
@@ -19,13 +20,13 @@ import 'package:flutter/rendering.dart';
 
 void main() {
   // final store = Store<CountState>(reducer, initialState: CountState.initState());
-  Store<AppState> createStore() {
-    return Store(
-      appReducer,
-      initialState: AppState.initial()
-    );
-  }
-  final store = createStore();
+  // Store<AppState> createStore() {
+  //   return Store(
+  //     appReducer,
+  //     initialState: AppState.initial()
+  //   );
+  // }
+  // final store = createStore();
   runApp(MyApp(store));
 }
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 // import 'package:iea/redux/state.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:iea/redux/module1/action.dart';
-import 'package:iea/redux/AppState.dart';
+import 'package:iea/redux/appActions.dart';
+import 'package:iea/redux/appState.dart';
 // import 'package:iea/redux/AppReducer.dart';
 
 class MineScreen extends StatefulWidget {
@@ -29,7 +29,7 @@ class _MineScreenState extends State<MineScreen>
       appBar: AppBar(
         title: StoreConnector<AppState, VoidCallback>(
         converter: (store) {
-          // return () => store.dispatch(GlobalAction.ChangeToken);
+          return () => store.dispatch(LoginSuccessAction(token: 'new Token'));
         },
         builder: (context, callback) {
           return GestureDetector(
@@ -48,7 +48,7 @@ class _MineScreenState extends State<MineScreen>
               'You have pushed the button this many times:',
             ),
             StoreConnector<AppState,int>(
-              converter: (store) => store.state.countState.count,
+              converter: (store) => store.state.count.counter,
               builder: (context, count) {
                 return Text(
                   count.toString(),
@@ -70,12 +70,12 @@ class _MineScreenState extends State<MineScreen>
       ),
       floatingActionButton: StoreConnector<AppState, VoidCallback>(
         converter: (store) {
-          return () => store.dispatch(Action.increment);
+          return () => store.dispatch(Actions.Increase);
         },
         builder: (context, callback) {
           return FloatingActionButton(
             onPressed: callback,
-            tooltip: 'Increment',
+            tooltip: 'Increase',
             child: new Icon(Icons.add),
           );
         },
