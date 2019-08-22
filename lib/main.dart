@@ -15,6 +15,7 @@ import 'package:iea/redux/appState.dart';
 // import 'package:iea/redux/AppReducer.dart';
 // import 'package:iea/redux/reducer.dart';
 // import 'dart:developer';
+import 'package:iea/redux/appActions.dart';
 
 import 'package:flutter/rendering.dart';
 
@@ -27,6 +28,7 @@ void main() {
   //   );
   // }
   // final store = createStore();
+  // store.dispatch(LoginSuccessAction(token: 'new asfasfasfToken'));
   runApp(MyApp(store));
 }
 
