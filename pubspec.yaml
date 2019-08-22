@@ -36,6 +36,8 @@ dependencies:
   permission_handler: ^3.1.0
   progress_dialog: ^1.1.0+1
   toast: ^0.1.4
+  redux: ^3.0.0
+  flutter_redux: ^0.5.2
 
 dev_dependencies:
   flutter_test:

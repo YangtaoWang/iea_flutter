@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:iea/provider/base/base_resp.dart';
+// import 'package:iea/provider/base/base_resp.dart';
 import 'package:iea/blocs/courseDetailPage_blocs/imgList_bloc.dart';
 import 'package:iea/models/courseDetailPage_models/imgList_model.dart';
 import 'package:iea/utils/sign_util.dart';
 import 'package:iea/utils/date_util.dart';
-import 'package:iea/widgets/error.dart';
-import 'package:iea/widgets/loading.dart';
+// import 'package:iea/redux/state.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:iea/redux/AppState.dart';
+// import 'package:iea/widgets/error.dart';
+// import 'package:iea/widgets/loading.dart';
 class CourseDetailPage extends StatefulWidget{
   final int num;
-
   CourseDetailPage({Key key, @required this.num}) : super(key: key);
   @override 
   State<StatefulWidget> createState() {
@@ -69,29 +71,40 @@ class CourseDetailPageState extends State<CourseDetailPage>{
     //     },
     //   )
     // );
-    return StreamBuilder<BaseResp>(
-      stream: _bloc.imgListStream,
-      builder: (context, AsyncSnapshot<BaseResp> snapshot) {
-          if (snapshot.data != null && snapshot.hasData) {
-            var response = snapshot.data;
-            if (response.result == true && response.data != null) {
-              imgList = response.data;
-              print(imgList[0].bannerHref);
-              return Scaffold(
-                body: ListView.builder(
-                  itemCount: imgList.length,
-                  itemBuilder: (context, index){
-                    return Image.network(imgList[index].bannerImg);
-                  },
-                )
-              );
-            } else {
-              return ErrorPage();
-            }
-          } else {
-            return LoadingPage();
-          }
-        }
+    // return StreamBuilder<BaseResp>(
+    //   stream: _bloc.imgListStream,
+    //   builder: (context, AsyncSnapshot<BaseResp> snapshot) {
+    //       if (snapshot.data != null && snapshot.hasData) {
+    //         var response = snapshot.data;
+    //         if (response.result == true && response.data != null) {
+    //           imgList = response.data;
+    //           print(imgList[0].bannerHref);
+    //           return Scaffold(
+    //             body: ListView.builder(
+    //               itemCount: imgList.length,
+    //               itemBuilder: (context, index){
+    //                 return Image.network(imgList[index].bannerImg);
+    //               },
+    //             )
+    //           );
+    //         } else {
+    //           return ErrorPage();
+    //         }
+    //       } else {
+    //         return LoadingPage();
+    //       }
+    //     }
+    // );
+    return Scaffold(
+      body: StoreConnector<AppState,int>(
+        converter: (store) => store.state.countState.count,
+        builder: (context, count) {
+          return Text(
+            count.toString(),
+            style: Theme.of(context).textTheme.display1,
+          );
+        },
+      )
     );
     
   }

@@ -1,37 +1,58 @@
 import 'package:flutter/material.dart';
+// import 'package:iea/redux/state.dart';
 import 'package:iea/screens/courseDetailPage/courseDetail_page.dart';
-import 'package:iea/screens/indexPage/index_page.dart';
+// import 'package:iea/screens/indexPage/index_page.dart';
 import 'package:iea/screens/mineCoursePage/mineCourse_page.dart';
 import 'package:iea/screens/courseExamPage/courseExam_page.dart';
 import 'package:iea/screens/courseExamResultPage/courseExamResult_page.dart';
 import 'package:iea/screens/feedbackPage/feedback_page.dart';
 import 'package:iea/screens/playerPage/player_page.dart';
+import 'package:iea/screens/minepage/mine_screen.dart';
+import 'package:redux/redux.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:iea/redux/AppState.dart';
+import 'package:iea/redux/AppReducer.dart';
+// import 'package:iea/redux/reducer.dart';
 // import 'dart:developer';
 
 import 'package:flutter/rendering.dart';
 
-void main() => runApp(
-  MyApp()
-);
+void main() {
+  // final store = Store<CountState>(reducer, initialState: CountState.initState());
+  Store<AppState> createStore() {
+    return Store(
+      appReducer,
+      initialState: AppState.initial()
+    );
+  }
+  final store = createStore();
+  runApp(MyApp(store));
+}
 
 class MyApp extends StatelessWidget {
+  final Store<AppState> store;
+  MyApp(this.store);
   @override
+
   Widget build(BuildContext context) {
     // debugPaintSizeEnabled = true;
-    return MaterialApp(
-      title: 'Material App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue
-      ),
-      home:HomePage(title: 'iea'),
-      routes: {
-        '/test': (context)=> CourseDetailPage(num: 1),
-        '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
-        '/courseExamAnswer': (context)=> CourseExamResultPage(),
-        '/detail': (context)=> CourseDetailPage(num: 1),
-        '/feedback': (context)=> FeedbackPage(),
-        '/player': (context) => PlayerPage(),
-      },
+    return StoreProvider<AppState>(
+      store: store,
+      child: MaterialApp(
+        title: 'Material App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue
+        ),
+        home:HomePage(title: 'iea'),
+        routes: {
+          '/test': (context)=> CourseDetailPage(num: 1),
+          '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
+          '/courseExamAnswer': (context)=> CourseExamResultPage(),
+          '/detail': (context)=> CourseDetailPage(num: 1),
+          '/feedback': (context)=> FeedbackPage(),
+          '/player': (context) => PlayerPage(),
+        },
+      )
     );
   }
 }
@@ -44,7 +65,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
-  final widgetItems = [IndexPage(), MineCoursePage(), CourseDetailPage(num: 1)];
+  final widgetItems = [MineScreen(), MineCoursePage(), CourseDetailPage(num: 1)];
   List<String> widgetNames = ['首页', '我的课程' ,'我的'];
   @override
   Widget build(BuildContext context) {

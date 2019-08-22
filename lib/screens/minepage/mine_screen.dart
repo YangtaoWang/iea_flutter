@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+// import 'package:iea/redux/state.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:iea/redux/module1/action.dart';
+import 'package:iea/redux/AppState.dart';
+// import 'package:iea/redux/AppReducer.dart';
 
 class MineScreen extends StatefulWidget {
   @override
@@ -10,19 +15,30 @@ class _MineScreenState extends State<MineScreen>
   @override
   bool get wantKeepAlive => true;
 
-  int _counter = 0;
+  // int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  // void _incrementCounter() {
+  //   setState(() {
+  //     _counter++;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PagesScreen'),
+        title: StoreConnector<AppState, VoidCallback>(
+        converter: (store) {
+          // return () => store.dispatch(GlobalAction.ChangeToken);
+        },
+        builder: (context, callback) {
+          return GestureDetector(
+            onTap: callback,
+            child: Text('PagesScreen'),
+          );
+        },
+        )
+        
       ),
       body: new Center(
         child: new Column(
@@ -31,18 +47,39 @@ class _MineScreenState extends State<MineScreen>
             new Text(
               'You have pushed the button this many times:',
             ),
-            new Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            StoreConnector<AppState,int>(
+              converter: (store) => store.state.countState.count,
+              builder: (context, count) {
+                return Text(
+                  count.toString(),
+                  style: Theme.of(context).textTheme.display1,
+                );
+              },
             ),
+            // StoreConnector<AppState, String>(
+            //   // converter: (store) => store.state.globalState.token,
+            //   builder: (context, token) {
+            //     return Text(
+            //       token.toString(),
+            //       style: Theme.of(context).textTheme.display1,
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: new Icon(Icons.add),
-      ),
+      floatingActionButton: StoreConnector<AppState, VoidCallback>(
+        converter: (store) {
+          return () => store.dispatch(Action.increment);
+        },
+        builder: (context, callback) {
+          return FloatingActionButton(
+            onPressed: callback,
+            tooltip: 'Increment',
+            child: new Icon(Icons.add),
+          );
+        },
+      )
     );
   }
 }
