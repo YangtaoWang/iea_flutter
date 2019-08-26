@@ -1,4 +1,4 @@
-enum Actions{
+enum AppActions{
   Increase,
   Login,
   LoginSuccess,
@@ -7,12 +7,12 @@ enum Actions{
 
 /// 定义所有action的基类
 class Action{
-  final Actions type;
+  final AppActions type;
   Action({this.type});
 }
 
 /// 定义Login成功action
 class LoginSuccessAction extends Action{
   final String token;
-  LoginSuccessAction({this.token}) : super(type: Actions.LoginSuccess);
+  LoginSuccessAction({this.token}) : super(type: AppActions.LoginSuccess);
 }

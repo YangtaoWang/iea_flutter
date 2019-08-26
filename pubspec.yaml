@@ -38,6 +38,7 @@ dependencies:
   toast: ^0.1.4
   redux: ^3.0.0
   flutter_redux: ^0.5.2
+  extended_image: ^0.5.5
 
 dev_dependencies:
   flutter_test:
@@ -62,7 +63,8 @@ flutter:
    - assets/images/homepage/5731557994768_.piccopy@3x.png
 
 
-
+   - assets/images/homepage/icon_me_course_sel.png
+   - assets/images/homepage/icon_me_course_unsel.png
    - assets/images/homepage/Page1@2x.png
    - assets/images/homepage/Page1@3x.png
    - assets/images/homepage/Page1Copy2@2x.png
@@ -86,6 +88,8 @@ flutter:
    - assets/images/playerPage/afterCourseExam1.png
    - assets/images/playerPage/afterCourseExam2.png
    - assets/images/playerPage/wenhao.png
+
+   - assets/images/mypage/icon_me_bg.png
    
   fonts:
     - family: iconfont

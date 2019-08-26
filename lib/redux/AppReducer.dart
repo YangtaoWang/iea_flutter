@@ -2,10 +2,10 @@ import 'package:iea/redux/appState.dart';
 import 'package:iea/redux/appActions.dart';
 AppState appReducer(AppState state, dynamic action){
   print("state charge :$action ");
-  if (action == Actions.Increase) {
+  if (action == AppActions.Increase) {
     state.count.counter += 1;
   }
-  if (action == Actions.LogoutSuccess){ 
+  if (action == AppActions.LogoutSuccess){ 
     state.auth.isLogin = false;
     state.auth.token = null;
   }

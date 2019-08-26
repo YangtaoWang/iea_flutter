@@ -15,7 +15,7 @@ class _IndexbannerState extends State<Indexbanner>
   bool get wantKeepAlive => true;
   GetIndexBannerListBloc _bloc = new GetIndexBannerListBloc();
   List<IndexOpenCourseModel> indexBannerList = [];
-   _getIndexBanner() {
+  _getIndexBanner() {
     Map<String, String>  params = {'type': '1'};
     _bloc.getIndexBannerList(params);
   }

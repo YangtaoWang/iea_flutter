@@ -17,9 +17,9 @@ class IndexPageApiProvider extends BaseApiProvider {
     return super.verifyMiddleWare(response);
   }
   // 精品课列表
-  Future<BaseResp> indexMenuClassList(Map<String, dynamic> params) async {
+  Future<BaseResp> indexMenuClassList() async {
     final response =
-        await get(NetworkConfig.indexPageApi['indexMenuClassList'], params);
+        await get(NetworkConfig.indexPageApi['indexMenuClassList']);
     return super.verifyMiddleWare(response);
   }
 }

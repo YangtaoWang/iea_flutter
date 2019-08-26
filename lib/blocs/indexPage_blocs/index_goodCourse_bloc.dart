@@ -16,10 +16,10 @@ class IndexMenuClassListBloc {
   *  获取公开课类型列表
   * @links
   */
-  void indexMenuClassList([params]) {
+  void indexMenuClassList() {
     _indexMenuClassSubscription?.cancel();
     _indexMenuClassSubscription = _apiClient
-        .indexMenuClassList(params)
+        .indexMenuClassList()
         .asStream()
         .listen((BaseResp data) {
       if (data.result) {

@@ -70,7 +70,7 @@ class _MineScreenState extends State<MineScreen>
       ),
       floatingActionButton: StoreConnector<AppState, VoidCallback>(
         converter: (store) {
-          return () => store.dispatch(Actions.Increase);
+          return () => store.dispatch(AppActions.Increase);
         },
         builder: (context, callback) {
           return FloatingActionButton(
