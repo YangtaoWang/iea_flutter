@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-// import 'package:iea/blocs/indexPage_blocs/index_openClass_bloc.dart';
 import 'package:iea/models/indexPage_models/index_openClass_model.dart';
-// import 'package:iea/provider/base/base_resp.dart';
-// import 'package:iea/widgets/error.dart';
-// import 'package:iea/widgets/loading.dart';
 import 'package:extended_image/extended_image.dart';
-// import 'package:iea/provider/resource/indexpage_api_provider.dart';
 
 class MainOpenList extends StatefulWidget {
   final List<IndexOpenClassModel> openClassList;
@@ -17,22 +12,6 @@ class MainOpenList extends StatefulWidget {
 class _MainOpenListState extends State<MainOpenList> with AutomaticKeepAliveClientMixin<MainOpenList>{
   @override
   bool get wantKeepAlive => true;
-  // List<IndexOpenClassModel> openClassList;
-  // GetopenClassListBloc _bloc = new GetopenClassListBloc();
-  // _getOpenList() {
-  //   Map<String, String>  params = {'type': '2'};
-  //   _bloc.getopenClassList(params);
-  // }
-  // getOpenList() async {
-  //   Map<String, String>  params = {'type': '2'};
-  //   BaseResp data = await IndexPageApiProvider().openClassList(params);
-  //   if (data.result) {
-  //     data.data = (data.data as List).map((value) => IndexOpenClassModel.fromJson(value)).toList();
-  //   }
-  //   setState(() {
-  //     openClassList = data.data;
-  //   });
-  // }
   @override 
   void initState() {
     // _getOpenList();
@@ -41,78 +20,24 @@ class _MainOpenListState extends State<MainOpenList> with AutomaticKeepAliveClie
   }
   @override
   Widget build(BuildContext context) {
-    // return StreamBuilder<BaseResp>(
-    //   stream: _bloc.getopenClassListStream,
-    //   builder: (context, AsyncSnapshot<BaseResp> snapshot) {
-    //    if (snapshot.data != null && snapshot.hasData) {
-    //       var response = snapshot.data;
-    //       if (response.result == true && response.data != null) {
-    //         return Container(
-    //           margin: EdgeInsets.only(top: 19),
-    //           child: Column(
-    //             children: <Widget>[
-    //               Container(
-    //                 height: 110,
-    //                 child: OpenListView(openClassList: response.data)
-    //               ),
-    //               Container(
-    //                 margin: EdgeInsets.only(top: 24),
-    //                 height: 10,
-    //                 decoration: BoxDecoration(
-    //                   color: Color.fromRGBO(247, 247, 247, 1)
-    //                 ),
-    //               )
-    //             ],
-    //           ),
-    //         );
-    //       } else {
-    //           return ErrorPage();
-    //       }
-    //     } else {
-    //         return LoadingPage();
-    //     }
-    //   }
-    // );
-    // if (openClassList == null) {
-    //   return LoadingPage();
-    // } else {
-    //   return Container(
-    //     margin: EdgeInsets.only(top: 19),
-    //     child: Column(
-    //       children: <Widget>[
-    //         Container(
-    //           height: 110,
-    //           child: OpenListView(openClassList: openClassList)
-    //         ),
-    //         Container(
-    //           margin: EdgeInsets.only(top: 24),
-    //           height: 10,
-    //           decoration: BoxDecoration(
-    //             color: Color.fromRGBO(247, 247, 247, 1)
-    //           ),
-    //         )
-    //       ],
-    //     ),
-    //   );
-    // }
-      return Container(
-        margin: EdgeInsets.only(top: 19),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 110,
-              child: OpenListView(openClassList: widget.openClassList)
+    return Container(
+      margin: EdgeInsets.only(top: 19),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 110,
+            child: OpenListView(openClassList: widget.openClassList)
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 24),
+            height: 10,
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(247, 247, 247, 1)
             ),
-            Container(
-              margin: EdgeInsets.only(top: 24),
-              height: 10,
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(247, 247, 247, 1)
-              ),
-            )
-          ],
-        ),
-      );
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -142,25 +67,17 @@ class _OpenListViewState extends State<OpenListView> {
               Container(
                 width: 149,
                 child: AspectRatio(
-                aspectRatio: 10.0 / 5.44,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: ExtendedImage.network(
-                    widget.openClassList[index].bannerUrl,
-                    cache: true,
-                    enableLoadState: false,
-                    fit: BoxFit.fill
+                  aspectRatio: 10.0 / 5.44,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: ExtendedImage.network(
+                      widget.openClassList[index].bannerUrl,
+                      cache: true,
+                      enableLoadState: false,
+                      fit: BoxFit.fill
+                    )
                   )
                 )
-              )
-                // height: 81,
-                // decoration: BoxDecoration(
-                //   borderRadius: BorderRadius.circular(3),
-                //   image: DecorationImage(
-                //     image: NetworkImage(widget.openClassList[index].bannerUrl),
-                //     fit: BoxFit.fill
-                //   )
-                // ),
               ),
               Container(
                 width: 149,
