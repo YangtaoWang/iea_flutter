@@ -4,6 +4,7 @@ import 'package:iea/models/indexPage_models/index_goodCourse_model.dart';
 // import 'package:iea/provider/base/base_resp.dart';
 // import 'package:iea/widgets/error.dart';
 // import 'package:iea/widgets/loading.dart';
+import 'package:extended_image/extended_image.dart';
 class MainGoodList extends StatefulWidget {
   final List<IndexGoodCourseModel> indexMenuClassList;
   MainGoodList({Key key, @required this.indexMenuClassList}) : super(key: key);
@@ -134,14 +135,18 @@ class _MainGoodListState extends State<MainGoodList> with AutomaticKeepAliveClie
                 child: Text('精品好课试听', style: TextStyle(color: Color.fromRGBO(25, 25, 25, 1), fontSize: 17, fontWeight: FontWeight.w500)),
                 ),
                 Container(
-                  height: 118,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(widget.indexMenuClassList[0].bannerUrl),
-                      fit: BoxFit.fill
-                    ),
-                    borderRadius: BorderRadius.circular(8)
-                  ),
+                  child: AspectRatio(
+                    aspectRatio: 10.0 / 3.46,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: ExtendedImage.network(
+                        widget.indexMenuClassList[0].bannerUrl,
+                        cache: true,
+                        enableLoadState: false,
+                        fit: BoxFit.fill
+                      )
+                    )
+                  )
                 ),
                 Container(
                   child: ListView.builder(
@@ -159,16 +164,20 @@ class _MainGoodListState extends State<MainGoodList> with AutomaticKeepAliveClie
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Container(
-                                width: 149,
-                                height: 81,
-                                margin: EdgeInsets.only(right: 16),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(widget.indexMenuClassList[index].gdCover),
-                                    fit: BoxFit.fill
-                                  ),
-                                  borderRadius: BorderRadius.circular(4)
+                                child: AspectRatio(
+                                  aspectRatio: 10.0 / 5.44,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    child: ExtendedImage.network(
+                                      widget.indexMenuClassList[index].gdCover,
+                                      cache: true,
+                                      enableLoadState: false,
+                                      fit: BoxFit.fill
+                                    )
+                                  )
                                 ),
+                                width: 149,
+                                margin: EdgeInsets.only(right: 16)
                               ),
                               Expanded(
                                 flex: 1,

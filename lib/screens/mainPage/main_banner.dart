@@ -101,32 +101,10 @@ class _IndexSwiperState extends State<IndexSwiper> {
                 widget.indexBannerList[index].picture,
                 cache: true,
                 enableLoadState: false,
-                fit: BoxFit.fill,
-                borderRadius: BorderRadius.circular(8),
-                // loadStateChanged: (ExtendedImageState state) {
-                //   switch (state.extendedImageLoadState) {
-                //     case LoadState.loading:
-                //       return Image.asset(
-                //         "assets/loading.gif",
-                //         fit: BoxFit.fill,
-                //       );
-                //       break;
-                //     case LoadState.completed:
-                //       break;
-                //     case LoadState.failed:
-                //       break;
-                //   }
-                // }
+                fit: BoxFit.fill
               )
             )
           ),
-          // decoration: BoxDecoration(
-          //   borderRadius: BorderRadius.circular(8),
-          //   image: DecorationImage(
-          //     image: NetworkImage(widget.indexBannerList[index].picture),
-          //     fit: BoxFit.fill,
-          //   )
-          // ),
         );
       },
       onTap: (index) {print(index);},// 点击事件 onTap

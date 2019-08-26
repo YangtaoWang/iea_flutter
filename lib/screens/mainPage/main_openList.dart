@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:iea/models/indexPage_models/index_openClass_model.dart';
 // import 'package:iea/provider/base/base_resp.dart';
 // import 'package:iea/widgets/error.dart';
-import 'package:iea/widgets/loading.dart';
+// import 'package:iea/widgets/loading.dart';
+import 'package:extended_image/extended_image.dart';
 // import 'package:iea/provider/resource/indexpage_api_provider.dart';
 
 class MainOpenList extends StatefulWidget {
@@ -140,14 +141,26 @@ class _OpenListViewState extends State<OpenListView> {
             children: <Widget>[
               Container(
                 width: 149,
-                height: 81,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(3),
-                  image: DecorationImage(
-                    image: NetworkImage(widget.openClassList[index].bannerUrl),
+                child: AspectRatio(
+                aspectRatio: 10.0 / 5.44,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: ExtendedImage.network(
+                    widget.openClassList[index].bannerUrl,
+                    cache: true,
+                    enableLoadState: false,
                     fit: BoxFit.fill
                   )
-                ),
+                )
+              )
+                // height: 81,
+                // decoration: BoxDecoration(
+                //   borderRadius: BorderRadius.circular(3),
+                //   image: DecorationImage(
+                //     image: NetworkImage(widget.openClassList[index].bannerUrl),
+                //     fit: BoxFit.fill
+                //   )
+                // ),
               ),
               Container(
                 width: 149,
