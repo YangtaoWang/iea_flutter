@@ -38,4 +38,13 @@ class NetworkConfig {
   static final Map<String, String> feedbackPageApi = {
     'postFeedback': 'http://172.18.70.102:8200/sunlands-app-api/feedback/commit'
   };
+  static final Map<String, String> phonePageApi = {
+    'getCode': 'http://172.18.70.102:8200/sunlands-app-api/login/message'
+  };
+  static final Map<String, String> loginPageApi = {
+    'login': 'http://172.18.70.102:8200/sunlands-app-api/login/phone'
+  };
+  static final Map<String, String> settingPageApi = {
+    'logout': 'http://172.18.70.102:8200/sunlands-app-api/logout'
+  };
 }

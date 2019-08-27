@@ -7,6 +7,9 @@ import 'package:iea/screens/courseExamResultPage/courseExamResult_page.dart';
 import 'package:iea/screens/feedbackPage/feedback_page.dart';
 import 'package:iea/screens/playerPage/player_page.dart';
 import 'package:iea/screens/mainPage/main_page.dart';
+import 'package:iea/screens/phonePage/phone_page.dart';
+import 'package:iea/screens/loginPage/login_page.dart';
+import 'package:iea/screens/settingPage/setting_page.dart';
 // import 'package:iea/screens/minepage/mine_screen.dart';
 import 'package:iea/screens/myCoursePage/myCourse_page.dart';
 import 'package:iea/screens/myPage/my_page.dart';
@@ -49,6 +52,10 @@ class MyApp extends StatelessWidget {
           '/detail': (context)=> CourseDetailPage(num: 1),
           '/feedback': (context)=> FeedbackPage(),
           '/player': (context) => PlayerPage(),
+          '/phone': (context) => PhonePage(),
+          '/my': (context) => MyPage(),
+          '/login': (context) => LoginPage(phone: ''),
+          '/setting': (context) => SettingPage()
         },
       )
     );

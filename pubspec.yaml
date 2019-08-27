@@ -39,6 +39,7 @@ dependencies:
   redux: ^3.0.0
   flutter_redux: ^0.5.2
   extended_image: ^0.5.5
+  shared_preferences: ^0.5.3+4
 
 dev_dependencies:
   flutter_test:
@@ -95,6 +96,12 @@ flutter:
    - assets/images/mypage/setting.png
    - assets/images/mypage/feedback.png
    - assets/images/mypage/weixin.png
+
+   - assets/images/phonepage/login-phone.png
+   - assets/images/phonepage/login-success.png
+   - assets/images/phonepage/login-close.png
+
+   - assets/images/loginpage/warn.png
    
   fonts:
     - family: iconfont

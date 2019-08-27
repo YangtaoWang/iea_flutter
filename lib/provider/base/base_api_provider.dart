@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 // import 'package:flutter/material.dart';
 import 'package:iea/provider/base/base_resp.dart';
 import 'package:dio/dio.dart';
@@ -44,7 +45,6 @@ class BaseApiProvider {
   BaseApiProvider() {
     dio.options.connectTimeout = 5000; //10s
     dio.options.receiveTimeout = 3000;
-
     dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     dio.interceptors
         .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
@@ -95,6 +95,9 @@ class BaseApiProvider {
         _loadingStatus = LoadingStatus.offLoading;
         //  Navigator.pop(MyApp.navigatorKey.currentState.overlay.context);
       }
+      // HttpHeaders h = response.headers;
+      print('#############');
+      print(response.headers);
       return response; // continue
     }, onError: (DioError e) {
       if (_loadingStatus == LoadingStatus.onLoading) {
