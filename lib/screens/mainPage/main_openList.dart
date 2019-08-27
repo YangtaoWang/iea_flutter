@@ -14,8 +14,6 @@ class _MainOpenListState extends State<MainOpenList> with AutomaticKeepAliveClie
   bool get wantKeepAlive => true;
   @override 
   void initState() {
-    // _getOpenList();
-    // getOpenList();
     super.initState();
   }
   @override
