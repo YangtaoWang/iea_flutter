@@ -45,7 +45,7 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
-        title: Text('设置', style: TextStyle(color: Colors.black, fontSize: 16)),
+        title: Text('设置', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
         iconTheme: IconThemeData(color: Colors.black),
         elevation: 0,
       ),

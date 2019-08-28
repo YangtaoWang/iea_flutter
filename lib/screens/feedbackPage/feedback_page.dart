@@ -23,9 +23,10 @@ class _FeedbackPageState extends State<FeedbackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(247, 247, 247, 1),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
-        title: Text('意见反馈', style: TextStyle(color: Colors.black, fontSize: 16)),
+        title: Text('意见反馈', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,

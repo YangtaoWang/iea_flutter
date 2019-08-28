@@ -57,15 +57,21 @@ class MyPageState extends State<MyPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: userImg == null ? AssetImage('assets/images/mypage/icon_default_photo.png') : NetworkImage(userImg)
+                    GestureDetector(
+                      onTap: () {
+                        if (userImg == null) return;
+                        Navigator.pushNamed(context, '/myInfo');
+                      },
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: userImg == null ? AssetImage('assets/images/mypage/icon_default_photo.png') : NetworkImage(userImg)
+                          ),
+                          borderRadius: BorderRadius.circular(40),
+                          border: Border.all(width: 5, color: Color.fromRGBO(151, 151, 151, .3), style: BorderStyle.solid)
                         ),
-                        borderRadius: BorderRadius.circular(40),
-                        border: Border.all(width: 5, color: Color.fromRGBO(151, 151, 151, .3), style: BorderStyle.solid)
                       ),
                     ),
                     GestureDetector(

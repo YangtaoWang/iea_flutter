@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iea/provider/resource/phonepage_api_provider.dart';
 import 'package:iea/provider/base/base_resp.dart';
 import 'package:iea/screens/loginPage/login_page.dart';
+import 'package:iea/screens/policyPage/policy_page.dart';
 
 class PhonePage extends StatefulWidget {
   PhonePage({Key key}) : super(key: key);
@@ -29,6 +30,7 @@ class _PhonePageState extends State<PhonePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: Container(
@@ -102,12 +104,20 @@ class _PhonePageState extends State<PhonePage> {
                           children: <Widget>[
                             Text('登录代表同意', style: TextStyle(fontSize: 12, color: Color.fromRGBO(102, 102, 102, 1))),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+                                  return PolicyPage(type: '1');
+                                }));
+                              },
                               child: Text('《IEA认证用户协议》', style: TextStyle(color: Color.fromRGBO(243, 110, 34, 1), fontSize: 12)),
                             ),  
                             Text('和', style: TextStyle(fontSize: 12, color: Color.fromRGBO(102, 102, 102, 1))),
                             GestureDetector(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+                                  return PolicyPage(type: '2');
+                                }));
+                              },
                               child: Text('《隐私政策》', style: TextStyle(color: Color.fromRGBO(243, 110, 34, 1), fontSize: 12)),
                             )
                           ],

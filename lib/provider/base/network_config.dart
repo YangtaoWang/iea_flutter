@@ -47,4 +47,10 @@ class NetworkConfig {
   static final Map<String, String> settingPageApi = {
     'logout': 'http://172.18.70.102:8200/sunlands-app-api/logout'
   };
+  static final Map<String, String> myInfoPageApi = {
+    'changeUserInfo': 'http://172.18.70.102:8200/sunlands-app-api/login/updateUserInformation'
+  };
+  static final Map<String, String> policyPageApi = {
+    'getPolicy': 'http://172.18.70.102:8200/sunlands-app-api/appRelated/getAgreement'
+  };
 }
