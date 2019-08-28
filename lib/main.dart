@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iea/screens/courseDetailPage/courseDetail_page.dart';
 // import 'package:iea/screens/indexPage/index_page.dart';
 // import 'package:iea/screens/mineCoursePage/mineCourse_page.dart';
-import 'package:iea/screens/courseExamPage/courseExam_page.dart';
-import 'package:iea/screens/courseExamResultPage/courseExamResult_page.dart';
-import 'package:iea/screens/feedbackPage/feedback_page.dart';
-import 'package:iea/screens/playerPage/player_page.dart';
 import 'package:iea/screens/mainPage/main_page.dart';
-import 'package:iea/screens/phonePage/phone_page.dart';
-import 'package:iea/screens/loginPage/login_page.dart';
-import 'package:iea/screens/settingPage/setting_page.dart';
 // import 'package:iea/screens/minepage/mine_screen.dart';
 import 'package:iea/screens/myCoursePage/myCourse_page.dart';
 import 'package:iea/screens/myPage/my_page.dart';
@@ -18,6 +10,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:iea/redux/index.dart';
 import 'package:iea/redux/appState.dart';
 import 'package:iea/sp/index.dart';
+import 'package:iea/router/index.dart';
 // import 'package:iea/redux/AppState.dart';
 // import 'package:iea/redux/AppReducer.dart';
 // import 'package:iea/redux/reducer.dart';
@@ -47,17 +40,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue
         ),
         home: HomePage(title: 'iea'),
-        routes: {
-          '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
-          '/courseExamAnswer': (context)=> CourseExamResultPage(),
-          '/detail': (context)=> CourseDetailPage(num: 1),
-          '/feedback': (context)=> FeedbackPage(),
-          '/player': (context) => PlayerPage(),
-          '/phone': (context) => PhonePage(),
-          '/my': (context) => MyPage(),
-          '/login': (context) => LoginPage(phone: ''),
-          '/setting': (context) => SettingPage()
-        },
+        routes: routes,
       )
     );
   }
