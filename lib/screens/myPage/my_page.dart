@@ -36,6 +36,8 @@ class MyPageState extends State<MyPage> {
   @override
   void initState() {
     // SP().removeData('userInfo');
+    // SP().removeData('a');
+    // SP().removeData('authorization');
     _getUserInfo();
     super.initState();
   }
@@ -68,7 +70,7 @@ class MyPageState extends State<MyPage> {
                     ),
                     GestureDetector(
                       onTap: () {
-                        if(userName != null) return;
+                        if (userName != null) return;
                         Navigator.pushNamed(context, '/phone');
                       },
                       child: Container(

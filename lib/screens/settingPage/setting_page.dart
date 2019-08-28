@@ -25,13 +25,14 @@ class _SettingPageState extends State<SettingPage> {
     return data;
   }
   _logoutClick() async{
-    SP().removeData('userInfo');
     BaseResp data = await _logout();
-    // if (data.code == 200) {
+    if (data.code == 200) {
       Fluttertoast.showToast(msg: "退出登录成功",toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.CENTER,timeInSecForIos: 1,backgroundColor: Color.fromRGBO(0, 0, 0, .5),textColor: Colors.white,fontSize: 16.0);
-      
+      SP().removeData('userInfo');
+      SP().removeData('a');
+      SP().removeData('authorization');
       Navigator.of(context).pop();
-    // }
+    }
   }
   @override
   void initState() {

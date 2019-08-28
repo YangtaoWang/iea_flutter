@@ -17,6 +17,7 @@ import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:iea/redux/index.dart';
 import 'package:iea/redux/appState.dart';
+import 'package:iea/sp/index.dart';
 // import 'package:iea/redux/AppState.dart';
 // import 'package:iea/redux/AppReducer.dart';
 // import 'package:iea/redux/reducer.dart';
@@ -72,6 +73,10 @@ class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
   final widgetItems = [MainPage(), MyCoursePage(), MyPage()];
   List<String> widgetNames = ['IEA认证', '我的课程' ,'我的'];
+  _getUserInfo() async{
+    String res = await SP().getData('userInfo');
+    return res != null;
+  }
   @override
   Widget build(BuildContext context) {
     // if (Platform.isAndroid) {
@@ -125,7 +130,13 @@ class _HomePageState extends State<HomePage> {
     );
 
   }
-  void _onItemTaped (int index){
+  void _onItemTaped (int index) async{
+    if(index == 1) {
+      if(!await _getUserInfo()) {
+        Navigator.pushNamed(context, '/phone');
+        return;
+      }
+    }
     setState(() {
       _currentIndex = index;
     });

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 // import 'package:flutter/material.dart';
 import 'package:iea/provider/base/base_resp.dart';
 import 'package:dio/dio.dart';
@@ -7,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:iea/utils/sign_util.dart';
 import 'package:iea/utils/date_util.dart';
 // import 'package:iea/main.dart';
+import 'package:iea/sp/index.dart';
 
 enum LoadingStatus { onLoading, offLoading }
 LoadingStatus _loadingStatus = LoadingStatus.offLoading;
@@ -86,7 +86,9 @@ class BaseApiProvider {
         // String sign = httpUtil.sortMap(options.queryParameters);
         // options.queryParameters['sign'] = sign;
         if (addToken) {
-          //  options.headers['token'] = LocalDataProvider.getInstance().getToken();
+          //  options.headers['a'] = LocalDataProvider.getInstance().getToken();
+          options.headers['a'] = SP().getData('a');
+          options.headers['authorization'] = SP().getData('authorization');
         }
       }
       return options; //continue
@@ -95,9 +97,11 @@ class BaseApiProvider {
         _loadingStatus = LoadingStatus.offLoading;
         //  Navigator.pop(MyApp.navigatorKey.currentState.overlay.context);
       }
-      // HttpHeaders h = response.headers;
-      print('#############');
-      print(response.headers);
+
+      if (response.headers['authorization'] is List &&  response.headers['authorization'].toString() != '[]') {
+        SP().saveData('authorization', response.headers['authorization'][0]);
+        SP().saveData('a', response.headers['a'][0]);
+      }
       return response; // continue
     }, onError: (DioError e) {
       if (_loadingStatus == LoadingStatus.onLoading) {

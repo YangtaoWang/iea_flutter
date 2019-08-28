@@ -1,7 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 class SP {
   Map<String, String> _spType = {
-    'userInfo': 'Map'
+    'userInfo': 'Map',
+    'a': 'String',
+    'authorization': 'String'
   };
   /*
    * 存储数据
