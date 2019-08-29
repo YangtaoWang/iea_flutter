@@ -12,6 +12,7 @@ import 'package:iea/screens/policyPage/policy_page.dart';
 import 'package:iea/screens/homepage/home_page.dart';
 import 'package:iea/screens/splashPage/firstPage.dart';
 import 'package:iea/screens/splashPage/guidePage.dart';
+import 'package:iea/screens/splashPage/webView.dart';
 
 final routes = {
   '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
@@ -27,5 +28,6 @@ final routes = {
   '/policy': (context) => PolicyPage(type: ''),
   '/home': (context) => HomePage(),
   '/first': (context) => FirstPage(),
-  '/guide': (context) => GuidePage()
+  '/guide': (context) => GuidePage(),
+  '/webView': (context) => WebViewPage()
 };

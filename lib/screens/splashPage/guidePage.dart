@@ -55,6 +55,8 @@ class _GuideSwiperState extends State<GuideSwiper> {
       onTap: (index) {
         if (index == 2) {
           Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => route == null);
+        } else {
+          Navigator.pushReplacementNamed(context, '/webView');
         }
       },// 点击事件 onTap
       pagination: SwiperPagination( // 分页指示器
