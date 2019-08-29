@@ -45,7 +45,9 @@ class NetworkConfig {
     'login': 'http://172.18.70.102:8200/sunlands-app-api/login/phone'
   };
   static final Map<String, String> settingPageApi = {
-    'logout': 'http://172.18.70.102:8200/sunlands-app-api/logout'
+    'logout': 'http://172.18.70.102:8200/sunlands-app-api/logout',
+    'getWX': 'http://172.18.70.102:8200/sunlands-app-api/appRelated/getAdviceWechat',
+    'upLoadImg': 'http://172.18.70.102:8200/sunlands-app-api/login/uploadImgUrl'
   };
   static final Map<String, String> myInfoPageApi = {
     'changeUserInfo': 'http://172.18.70.102:8200/sunlands-app-api/login/updateUserInformation'

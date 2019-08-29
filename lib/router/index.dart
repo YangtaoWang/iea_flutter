@@ -9,6 +9,9 @@ import 'package:iea/screens/myPage/my_page.dart';
 import 'package:iea/screens/courseDetailPage/courseDetail_page.dart';
 import 'package:iea/screens/myInfoPage/myInfo_page.dart';
 import 'package:iea/screens/policyPage/policy_page.dart';
+import 'package:iea/screens/homepage/home_page.dart';
+import 'package:iea/screens/splashPage/firstPage.dart';
+import 'package:iea/screens/splashPage/guidePage.dart';
 
 final routes = {
   '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
@@ -21,5 +24,8 @@ final routes = {
   '/login': (context) => LoginPage(phone: ''),
   '/setting': (context) => SettingPage(),
   '/myInfo': (context) => MyInfoPage(),
-  '/policy': (context) => PolicyPage(type: '',)
+  '/policy': (context) => PolicyPage(type: ''),
+  '/home': (context) => HomePage(),
+  '/first': (context) => FirstPage(),
+  '/guide': (context) => GuidePage()
 };

@@ -13,4 +13,14 @@ class SettingPageApiProvider extends BaseApiProvider {
         await get(NetworkConfig.settingPageApi['logout']);
     return super.verifyMiddleWare(response);
   }
+  Future<BaseResp> upLoadImg(Map<String, dynamic> params) async {
+    final response =
+        await post(NetworkConfig.settingPageApi['upLoadImg'], params);
+    return super.verifyMiddleWare(response);
+  }
+  Future<BaseResp> getWX() async {
+    final response =
+        await get(NetworkConfig.settingPageApi['getWX']);
+    return super.verifyMiddleWare(response);
+  }
 }

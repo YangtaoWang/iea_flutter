@@ -68,7 +68,9 @@ class BaseApiProvider {
           break;
         }
       }
-
+      if(options.path.indexOf('uploadImgUrl') != -1){
+        addAuth = false;
+      }
       if (addAuth) {
         String timestamp = DateUtils.getNowDateMs().toString(); // 获取当前时间戳
         if(options.method == "POST") {

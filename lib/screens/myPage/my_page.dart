@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iea/sp/index.dart';
 import 'package:iea/models/loginPage_models/userInfo_model.dart';
 import 'dart:convert' as convert;
+import 'package:extended_image/extended_image.dart';
+
 
 class MyPage extends StatefulWidget{
   @override 
@@ -65,10 +67,19 @@ class MyPageState extends State<MyPage> {
                       child: Container(
                         width: 80,
                         height: 80,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: userImg != null ? ExtendedImage.network(
+                            userImg,
+                            cache: true,
+                            enableLoadState: false,
+                            fit: BoxFit.fill
+                          ) : Image.asset('assets/images/mypage/icon_default_photo.png')
+                        ),
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: userImg == null ? AssetImage('assets/images/mypage/icon_default_photo.png') : NetworkImage(userImg)
-                          ),
+                          // image: DecorationImage(
+                          //   image: userImg == null ? AssetImage('assets/images/mypage/icon_default_photo.png') : NetworkImage(userImg)
+                          // ),
                           borderRadius: BorderRadius.circular(40),
                           border: Border.all(width: 5, color: Color.fromRGBO(151, 151, 151, .3), style: BorderStyle.solid)
                         ),

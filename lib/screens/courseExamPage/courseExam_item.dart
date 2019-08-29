@@ -111,7 +111,6 @@ class _CourseExamItemState extends State<CourseExamItem>{
                         if(widget.sum - 1 == widget.currentPage) return;
                         thr.throttle((){
                           print('进入');
-
                           // Timer(Duration(milliseconds: 200), (){
                               widget.controller.animateToPage(widget.currentPage + 1, duration: Duration(milliseconds: 300),curve: Curves.easeInOut,);
                             // });

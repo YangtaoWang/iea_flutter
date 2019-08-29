@@ -16,6 +16,8 @@ class _MainPageState extends State<MainPage> with AutomaticKeepAliveClientMixin<
   bool get wantKeepAlive => true;
 
   IndexAllBloc _bloc = new IndexAllBloc();
+
+
   @override
   void initState() {
     _bloc.getAllData();

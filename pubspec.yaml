@@ -32,7 +32,8 @@ dependencies:
   video_player: ^0.10.1+4
   chewie: ^0.9.7
   flutter_downloader: ^1.1.7
-  path_provider: 1.1.2
+  # path_provider: 1.1.2
+  path_provider: ^1.2.0
   permission_handler: ^3.1.0
   progress_dialog: ^1.1.0+1
   toast: ^0.1.4
@@ -43,6 +44,8 @@ dependencies:
   flutter_cupertino_date_picker: ^1.0.12
   image_picker: ^0.6.1+4
   flutter_html: ^0.10.4
+  image_picker_saver: ^0.3.0
+  image_cropper: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -105,6 +108,11 @@ flutter:
    - assets/images/phonepage/login-close.png
 
    - assets/images/loginpage/warn.png
+
+   - assets/images/splashPage/first.jpeg
+   - assets/images/splashPage/guide1.jpeg
+   - assets/images/splashPage/guide2.jpeg
+   - assets/images/splashPage/guide3.jpg
    
   fonts:
     - family: iconfont

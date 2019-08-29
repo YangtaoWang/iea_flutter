@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:iea/provider/base/base_resp.dart';
@@ -10,7 +11,12 @@ import 'package:iea/screens/myInfoPage/sexBord.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 import 'package:iea/provider/resource/myInfoPage_api_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:image_picker/image_picker.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
+// import 'package:iea/blocs/settingPage_blocs/uploadImg.dart';
+import 'package:extended_image/extended_image.dart';
+import 'package:iea/provider/resource/settingPage_api_provider.dart';
+
 
 class MyInfoPage extends StatefulWidget {
   MyInfoPage({Key key}) : super(key: key);
@@ -26,12 +32,47 @@ class _MyInfoPageState extends State<MyInfoPage> {
   int userId;
   DateTime _dateTime;
   // File _image;
-  // Future _getImage() async {
-  //   var image = await ImagePicker.pickImage(source: ImageSource.camera);
-  //   setState(() {
-  //     _image = image;
-  //   });
-  // }
+  // UploadImgBloc _bloc = UploadImgBloc();
+  _postImg(FormData formdata) async{
+    // _bloc.upLoadImg(formdata);
+    BaseResp res = await  SettingPageApiProvider().upLoadImg(formdata);
+    if (res.code == 200) {
+      Fluttertoast.showToast(msg: '图片上传成功', toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.CENTER,timeInSecForIos: 1,backgroundColor: Color.fromRGBO(0, 0, 0, .5),textColor: Colors.white,fontSize: 16.0);
+      setState(() {
+        userImg = res.data;
+      });
+    } else {
+      Fluttertoast.showToast(msg: '图片上传失败', toastLength: Toast.LENGTH_SHORT,gravity: ToastGravity.CENTER,timeInSecForIos: 1,backgroundColor: Color.fromRGBO(0, 0, 0, .5),textColor: Colors.white,fontSize: 16.0);
+    }
+
+  }
+  Future _getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    await _cropImage(image);
+  }
+  Future<Null> _cropImage(File imageFile) async {
+    File croppedFile = await ImageCropper.cropImage(
+      sourcePath: imageFile.path,
+      ratioX: 1.0,
+      ratioY: 1.0,
+      maxWidth: 512,
+      maxHeight: 512,
+    );
+    print('裁剪完成');
+    _fileToFormData(croppedFile);
+  }
+  _fileToFormData(File image) async {
+    String path = image.path;
+    // print(path);
+    var name = path.substring(path.lastIndexOf("/") + 1, path.length);
+    var suffix = name.substring(name.lastIndexOf(".") + 1, name.length);
+    FormData formData = new FormData.from({
+      "file": new UploadFileInfo(new File(path), name,
+          contentType: ContentType.parse("image/$suffix"))
+    });
+    _postImg(formData);
+  }
+
   _getUserInfo() async{
     String res = await SP().getData('userInfo');
     UserInfo userInfo = UserInfo.fromJson(convert.jsonDecode(res));
@@ -41,7 +82,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
       userSex = userInfo.sex.toString();
       userId = userInfo.id;
       _dateTime = userInfo.birthday != null ? DateTime.parse(userInfo.birthday) : userInfo.birthday;
-      controller.text = userInfo.sex.toString();
+      controller.text = userInfo.username.toString();
     });
   }
   _showSex (BuildContext context) async { // 调起性别弹窗
@@ -88,6 +129,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
     BaseResp data = await MyInfoPageApiProvider().changeUserInfo(params);
     _showToastByCode(data.code);
     data.code == 200 && await _saveOkActions();
+    Navigator.of(context).pop();
   }
   _showToastByCode(code) {
     Map<String, String> infos = {
@@ -149,7 +191,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
             children: <Widget>[
               GestureDetector(
                 onTap: () {
-                  // _getImage();
+                  _getImage();
                 },
                 child: Container(
                   height: 70,
@@ -161,9 +203,22 @@ class _MyInfoPageState extends State<MyInfoPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text('头像', style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1), fontSize: 15)),
-                      ClipOval(
-                        child: userImg != null ? Image.network(userImg, width: 51, height: 51, fit: BoxFit.cover,) : Image.asset('assets/images/mypage/icon_me_bg.png', width: 51, height: 51, fit: BoxFit.cover,),
-                      ),
+                      Container(
+                        width: 51,
+                        height: 51,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(25.5),
+                          child: userImg != null ? ExtendedImage.network(
+                            userImg,
+                            cache: true,
+                            enableLoadState: false,
+                            fit: BoxFit.cover
+                          ) : Image.asset('assets/images/mypage/icon_me_bg.png', width: 51, height: 51, fit: BoxFit.cover,)
+                        ),
+                      )
+                      // ClipOval(
+                      //   child: userImg != null ? Image.network(userImg, width: 51, height: 51, fit: BoxFit.cover,) : Image.asset('assets/images/mypage/icon_me_bg.png', width: 51, height: 51, fit: BoxFit.cover,),
+                      // ),
                     ],
                   ), 
                 ),

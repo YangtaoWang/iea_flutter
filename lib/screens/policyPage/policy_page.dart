@@ -37,11 +37,14 @@ class _PolicyPageState extends State<PolicyPage> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: Container(
-          child: Html(
-            data: html == null ? '<p></p>' : html
-          )
-        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            child: Html(
+              data: html == null ? '<p></p>' : html
+            )
+          ),
+        )
       )
     );
   }
