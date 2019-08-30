@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +15,7 @@ import 'package:image_cropper/image_cropper.dart';
 // import 'package:iea/blocs/settingPage_blocs/uploadImg.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:iea/provider/resource/settingPage_api_provider.dart';
+// import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 
 class MyInfoPage extends StatefulWidget {
@@ -59,8 +59,16 @@ class _MyInfoPageState extends State<MyInfoPage> {
       maxHeight: 512,
     );
     print('裁剪完成');
-    _fileToFormData(croppedFile);
+    // File compressFile = await _zipImg(croppedFile);
+    await _fileToFormData(croppedFile);
   }
+  // 压缩图片
+  // Future<File> _zipImg(File imageFile) async {
+  //   File compressFile = await FlutterImageCompress.compressAndGetFile(
+  //       imageFile.path, imageFile.path,
+  //       quality: 90);
+  //   return compressFile;
+  // }
   _fileToFormData(File image) async {
     String path = image.path;
     // print(path);

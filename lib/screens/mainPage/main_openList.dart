@@ -4,7 +4,8 @@ import 'package:extended_image/extended_image.dart';
 
 class MainOpenList extends StatefulWidget {
   final List<IndexOpenClassModel> openClassList;
-  MainOpenList({Key key, @required this.openClassList}) : super(key: key);
+  final List<IndexOpenClassModel> openClassBanner;
+  MainOpenList({Key key, @required this.openClassList, @required this.openClassBanner}) : super(key: key);
 
   _MainOpenListState createState() => _MainOpenListState();
 }
@@ -18,8 +19,9 @@ class _MainOpenListState extends State<MainOpenList> with AutomaticKeepAliveClie
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 19),
+    return widget.openClassList.length == 0 ? Container() :
+    Container(
+      margin: EdgeInsets.only(top: widget.openClassBanner.length == 0 ? 9 : 19),
       child: Column(
         children: <Widget>[
           Container(

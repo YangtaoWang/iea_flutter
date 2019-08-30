@@ -9,132 +9,143 @@ class PlayerPage extends StatefulWidget {
 }
 
 class _PlayerPageState extends State<PlayerPage> {
-  static VideoPlayerController videoPlayerController = VideoPlayerController.network('https://flutter.github.io/assets-for-api-docs/videos/butterfly.mp4');
+  static VideoPlayerController videoPlayerController = VideoPlayerController.network('https://xszx-prod-1251987637.cos.ap-beijing.myqcloud.com/%E5%9B%BD%E9%99%85%E8%90%A5%E5%85%BB%E5%B8%88.mp4');
   final chewieController = ChewieController(
     videoPlayerController: videoPlayerController,
-    aspectRatio: 3 / 2,
-    autoPlay: true,
-    looping: true,
+    aspectRatio: 16 / 9,
+    autoPlay: !true,
+    looping: false,
+    placeholder: Image.network('https://xszx-test-1251987637.cosbj.myqcloud.com/file/20190614/fe82d65bf5464498b389632f82197983.png')
   );
   int currentTab = 1;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 210,
-            decoration: BoxDecoration(
-              // color: Color.fromRGBO(51, 51, 51, .3)
-            ),
-            child: new Chewie(
-              controller: chewieController,
-                // new VideoPlayerController.network(this.url),
-                // aspectRatio: 16 / 9,
-                // autoPlay: !true,
-                // looping: true,
-                // showControls: true,
-                // // 占位图
-                // placeholder: new Container(
-                //     color: Colors.grey,
-                // ),
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Text('播放', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+      ),
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 210,
+              decoration: BoxDecoration(
+                // color: Color.fromRGBO(51, 51, 51, .3)
+              ),
+              child: new Chewie(
+                controller: chewieController,
+                  // new VideoPlayerController.network(this.url),
+                  // aspectRatio: 16 / 9,
+                  // autoPlay: !true,
+                  // looping: true,
+                  // showControls: true,
+                  // // 占位图
+                  // placeholder: new Container(
+                  //     color: Colors.grey,
+                  // ),
 
-                // // 是否在 UI 构建的时候就加载视频
-                // autoInitialize: !true,
+                  // // 是否在 UI 构建的时候就加载视频
+                  // autoInitialize: !true,
 
-                // // 拖动条样式颜色
-                // materialProgressColors: new ChewieProgressColors(
-                //     playedColor: Colors.red,
-                //     handleColor: Colors.blue,
-                //     backgroundColor: Colors.grey,
-                //     bufferedColor: Colors.lightGreen,
-                // ),
+                  // // 拖动条样式颜色
+                  // materialProgressColors: new ChewieProgressColors(
+                  //     playedColor: Colors.red,
+                  //     handleColor: Colors.blue,
+                  //     backgroundColor: Colors.grey,
+                  //     bufferedColor: Colors.lightGreen,
+                  // ),
+              ),
             ),
-          ),
-          Container(
-            height: 50,
-            decoration: BoxDecoration(
-              border: Border(bottom: BorderSide(color: Color.fromRGBO(151, 151, 151, .18)))
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      currentTab = 1;
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 30),
-                    child: Stack(
-                      alignment: AlignmentDirectional.center,
-                      children: <Widget>[
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text('老师', style: TextStyle(color: currentTab == 1 ? Color.fromRGBO(51, 51, 51, 1) : Color.fromRGBO(153, 153, 153, 1), fontSize: 16, fontWeight: FontWeight.w600),)
-                          ],
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            height: 5,
-                            width: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2.5),
-                              color: currentTab == 1 ? Color.fromRGBO(243, 110, 34, 1) : null,
-                            ),
-                          ),
-                        )
-                      ],
-                    )
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      currentTab = 2;
-                    });
-                  },
-                  child: Container(
-                    margin: EdgeInsets.only(left: 38),
-                    child: Stack(
-                      alignment: AlignmentDirectional.center,
-                      children: <Widget>[
-                        Container(
-                          child: Column(
+            Container(
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(color: Color.fromRGBO(151, 151, 151, .18)))
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        currentTab = 1;
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 30),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: <Widget>[
+                          Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                              Text('课程服务',style: TextStyle(color: currentTab == 2 ? Color.fromRGBO(51, 51, 51, 1) : Color.fromRGBO(153, 153, 153, 1), fontSize: 16, fontWeight: FontWeight.w600),)
+                              Text('老师', style: TextStyle(color: currentTab == 1 ? Color.fromRGBO(51, 51, 51, 1) : Color.fromRGBO(153, 153, 153, 1), fontSize: 16, fontWeight: FontWeight.w600),)
                             ],
                           ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          child: Container(
-                            height: 5,
-                            width: 20,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(2.5),
-                              color: currentTab == 2 ? Color.fromRGBO(243, 110, 34, 1) : null,
+                          Positioned(
+                            bottom: 0,
+                            child: Container(
+                              height: 5,
+                              width: 20,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2.5),
+                                color: currentTab == 1 ? Color.fromRGBO(243, 110, 34, 1) : null,
+                              ),
                             ),
                           )
-                        )
-                      ],
+                        ],
+                      )
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        currentTab = 2;
+                      });
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 38),
+                      child: Stack(
+                        alignment: AlignmentDirectional.center,
+                        children: <Widget>[
+                          Container(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text('课程服务',style: TextStyle(color: currentTab == 2 ? Color.fromRGBO(51, 51, 51, 1) : Color.fromRGBO(153, 153, 153, 1), fontSize: 16, fontWeight: FontWeight.w600),)
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            child: Container(
+                              height: 5,
+                              width: 20,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(2.5),
+                                color: currentTab == 2 ? Color.fromRGBO(243, 110, 34, 1) : null,
+                              ),
+                            )
+                          )
+                        ],
+                      )
                     )
                   )
-                )
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: currentTab == 1 ? TeacherDes() : CourseService()
-          )
-        ],
-      ),
+            Expanded(
+              flex: 1,
+              child: currentTab == 1 ? TeacherDes() : CourseService()
+            )
+          ],
+        ),
+      )
     );
+    
   }
 }
 

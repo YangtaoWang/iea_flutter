@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:iea/models/settingPage_models/wxInfo_model.dart';
+// import 'package:iea/models/settingPage_models/wxInfo_model.dart';
 
 import 'package:iea/provider/base/base_resp.dart';
 

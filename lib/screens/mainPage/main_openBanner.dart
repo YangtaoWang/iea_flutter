@@ -19,36 +19,20 @@ class _MainOpenBannerState extends State<MainOpenBanner> with AutomaticKeepAlive
   }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: EdgeInsets.only(left: 17),
-            child: Container(
-              height: 51,
-              alignment: FractionalOffset.centerLeft,
-              child: Text('公开课', style: TextStyle(color: Color.fromRGBO(25, 25, 25, 1), fontSize: 17, fontWeight: FontWeight.w500),)
-            )
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 17),
-            child: Container(
-              child: AspectRatio(
-                aspectRatio: 10.0 / 4.63,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: ExtendedImage.network(
-                    widget.openClassList[0].bannerUrl,
-                    cache: true,
-                    enableLoadState: false,
-                    fit: BoxFit.fill
-                  )
-                )
-              )
-            ),
+    return widget.openClassList.length == 0 ? Container() :
+    Container(
+      child: AspectRatio(
+        aspectRatio: 10.0 / 4.63,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: ExtendedImage.network(
+            widget.openClassList[0].bannerUrl,
+            cache: true,
+            enableLoadState: false,
+            fit: BoxFit.fill
           )
-        ],
-      ),
+        )
+      )
     );
   }
 }

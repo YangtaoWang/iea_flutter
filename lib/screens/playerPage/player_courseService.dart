@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:iea/screens/courseExamPage/courseExam_page.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
+// import 'dart:io';
+import 'package:iea/provider/resource/playerPage_api_provider.dart';
 class CourseService extends StatefulWidget{
   @override 
   State<StatefulWidget> createState() {
@@ -65,6 +67,10 @@ class CourseServiceState extends State<CourseService>{
       openFileFromNotification:
           true, // click on notification to open downloaded file (for Android)
     );
+    print('下载完成');
+  }
+  _downLoad(url, saveUrl) {
+    PlayerPageApiProvider().download(url, saveUrl);
   }
 
   @override 
@@ -80,17 +86,21 @@ class CourseServiceState extends State<CourseService>{
         children: <Widget>[
           GestureDetector(
             onTap: () async {
-                var _localPath = await _findLocalPath();
-                final savedDir = Directory(_localPath);
-                // 判断下载路径是否存在
-                bool hasExisted = await savedDir.exists();
-                // 不存在就新建路径
-                if (!hasExisted) {
-                  print('新建路径');
-                  savedDir.create();
-                  print(savedDir);
-                }
-                _downloadFile(_localPath);
+              if (await _checkPermission()) {
+                // var _localPath = await _findLocalPath();
+                // 获取存储路径
+                var _localPath = (await _findLocalPath()) + '/Download';
+                print(_localPath);
+                _downLoad('https://xszx-test-1251987637.cos.ap-beijing.myqcloud.com/file/025a6a29-c746-451c-b88e-bc86aa65fe1c.png', _localPath);
+                // final savedDir = Directory(_localPath);
+                // // 判断下载路径是否存在
+                // bool hasExisted = await savedDir.exists();
+                // // 不存在就新建路径
+                // if (!hasExisted) {
+                //   savedDir.create();
+                // }
+                // _downloadFile(_localPath);
+              } 
             },
             child: Container(
               height: 60,
@@ -109,20 +119,27 @@ class CourseServiceState extends State<CourseService>{
               ),
             ),
           ),
-          Container(
-            height: 60,
-            decoration: BoxDecoration(
-              border: Border(bottom: BorderSide(width: 1, color: Color.fromRGBO(151, 151, 151, 0.1)))
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Image.asset('assets/images/playerPage/courseExam.png', width: 15, height: 16,),
-                Container(
-                  child: Text('随堂考', style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1), fontSize: 18),),
-                  margin: EdgeInsets.only(left: 13),
-                )
-              ],
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(context, new MaterialPageRoute(builder: (BuildContext context){
+                return CourseExamPage(isExaming: true, currentPage: 0);
+              }));
+            },
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                border: Border(bottom: BorderSide(width: 1, color: Color.fromRGBO(151, 151, 151, 0.1)))
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Image.asset('assets/images/playerPage/courseExam.png', width: 15, height: 16,),
+                  Container(
+                    child: Text('随堂考', style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1), fontSize: 18),),
+                    margin: EdgeInsets.only(left: 13),
+                  )
+                ],
+              ),
             ),
           ),
           Container(

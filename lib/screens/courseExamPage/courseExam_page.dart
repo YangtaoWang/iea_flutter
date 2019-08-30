@@ -50,11 +50,11 @@ class _CourseExamPageState extends State<CourseExamPage>{
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.green),
-        title: Text('随堂考', style: TextStyle(color: Colors.black, fontSize: 16)),
+        iconTheme: IconThemeData(color: Colors.black),
+        title: Text('随堂考', style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w500)),
         backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: false,
+        centerTitle: true,
       ),
       body: StreamBuilder<BaseResp>(
         stream: _bloc.courseExamStream,

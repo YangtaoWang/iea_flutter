@@ -10,7 +10,7 @@ class _WebViewPageState extends State<WebViewPage> {
   @override
   Widget build(BuildContext context) {
     return WebviewScaffold(
-      url: "https://test.ieaorg.cn/",
+      url: "https://baidu.com",
       appBar: new AppBar(
         title: new Text("IEA官网", style: TextStyle(color: Colors.black, fontSize: 20),),
         backgroundColor: Colors.white,

@@ -36,23 +36,26 @@ class NetworkConfig {
     // 'getList': 'http://172.18.70.95:8200/sunlands-app-api/course/courseList'
   };
   static final Map<String, String> feedbackPageApi = {
-    'postFeedback': 'http://172.18.70.102:8200/sunlands-app-api/feedback/commit'
+    'postFeedback': hostUrl + 'feedback/commit'
   };
   static final Map<String, String> phonePageApi = {
-    'getCode': 'http://172.18.70.102:8200/sunlands-app-api/login/message'
+    'getCode': hostUrl + 'login/message'
   };
   static final Map<String, String> loginPageApi = {
-    'login': 'http://172.18.70.102:8200/sunlands-app-api/login/phone'
+    'login': hostUrl + 'login/phone'
   };
   static final Map<String, String> settingPageApi = {
-    'logout': 'http://172.18.70.102:8200/sunlands-app-api/logout',
-    'getWX': 'http://172.18.70.102:8200/sunlands-app-api/appRelated/getAdviceWechat',
-    'upLoadImg': 'http://172.18.70.102:8200/sunlands-app-api/login/uploadImgUrl'
+    'logout': hostUrl + 'logout',
+    'getWX': hostUrl + 'appRelated/getAdviceWechat',
+    'upLoadImg': hostUrl + 'login/uploadImgUrl'
   };
   static final Map<String, String> myInfoPageApi = {
-    'changeUserInfo': 'http://172.18.70.102:8200/sunlands-app-api/login/updateUserInformation'
+    'changeUserInfo': hostUrl + 'login/updateUserInformation'
   };
   static final Map<String, String> policyPageApi = {
-    'getPolicy': 'http://172.18.70.102:8200/sunlands-app-api/appRelated/getAgreement'
+    'getPolicy': hostUrl + 'appRelated/getAgreement'
+  };
+  static final Map<String, String> myCoursePageApi = {
+    'getMyCourse': hostUrl + 'course/courseList'
   };
 }

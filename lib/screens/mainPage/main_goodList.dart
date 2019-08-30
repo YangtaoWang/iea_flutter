@@ -21,11 +21,12 @@ class _MainGoodListState extends State<MainGoodList> with AutomaticKeepAliveClie
         padding: EdgeInsets.symmetric(horizontal: 17),
           child: Column(
             children: <Widget>[
-              Container(
+                Container(
                 height: 60,
                 alignment: FractionalOffset.centerLeft,
-                child: Text('精品好课试听', style: TextStyle(color: Color.fromRGBO(25, 25, 25, 1), fontSize: 17, fontWeight: FontWeight.w500)),
+                child: Text('IEA认证项目', style: TextStyle(color: Color.fromRGBO(25, 25, 25, 1), fontSize: 17, fontWeight: FontWeight.w500)),
                 ),
+                widget.indexMenuClassList[0].bannerUrl == null || widget.indexMenuClassList[0].bannerUrl == '' ? Container() :
                 Container(
                   child: AspectRatio(
                     aspectRatio: 10.0 / 3.46,

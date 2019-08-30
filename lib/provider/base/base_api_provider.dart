@@ -134,6 +134,12 @@ class BaseApiProvider {
     });
     return completer.future;
   }
+  
+  download(url, savePath) {
+    dio.download(url, savePath).then((res){
+      return res;
+    });
+  }
 
   _handleError(DioError error) {
     String errorDescription = "";
