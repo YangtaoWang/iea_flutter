@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iea/provider/resource/loginpage_api_provider.dart';
 import 'package:iea/sp/index.dart';
 import 'dart:convert' as convert;
+import 'package:iea/models/loginPage_models/iosDeviceInfo_model.dart';
 
 class LoginPage extends StatefulWidget {
   final String phone;
@@ -16,6 +17,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   TextEditingController controller = TextEditingController();
+  String _deviceVersion;
+  String _deviceId;
+  String _deviceType;
   String code = '';
   int clock = 60;
   bool isClock = true;
@@ -43,12 +47,20 @@ class _LoginPageState extends State<LoginPage> {
     return data;
   }
   _login(String phone, String code) async {
-    Map<String, String>  params = {'phone': phone, 'code': code, 'deviceType': '3', 'loginType': '2' };
+    Map<String, String>  params = {'phone': phone, 'code': code, 'deviceType': _deviceType, 'loginType': '2', 'deviceVersion': _deviceVersion, 'deviceId': _deviceId, 'appVersion': '1.1.1', 'channel_type': '1'};
     BaseResp data = await LoginPageApiProvider().login(params);
     return data;
   }
+  _getDeviceInfo() async{
+    String res = await SP().getData('DeviceInfo'); 
+    IosDeviceInfoModel info = IosDeviceInfoModel.fromJson(convert.jsonDecode(res));
+    _deviceVersion = info.deviceVersion;
+    _deviceId = info.deviceId; 
+    _deviceType = info.deviceType;
+  }
   @override 
   void initState() {
+    _getDeviceInfo();
     _startClock();
     super.initState();
   }

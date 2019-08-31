@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:iea/screens/splashPage/webView.dart';
 // import 'package:extended_image/extended_image.dart';
 
 class GuidePage extends StatefulWidget {
@@ -56,7 +57,9 @@ class _GuideSwiperState extends State<GuideSwiper> {
         if (index == 2) {
           Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => route == null);
         } else {
-          Navigator.pushReplacementNamed(context, '/webView');
+          Navigator.pushReplacement(context, new MaterialPageRoute(builder: (BuildContext context){
+            return WebViewPage(url: 'https://www.baidu.com');
+          }));
         }
       },// 点击事件 onTap
       pagination: SwiperPagination( // 分页指示器

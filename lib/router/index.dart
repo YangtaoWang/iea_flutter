@@ -6,18 +6,19 @@ import 'package:iea/screens/phonePage/phone_page.dart';
 import 'package:iea/screens/loginPage/login_page.dart';
 import 'package:iea/screens/settingPage/setting_page.dart';
 import 'package:iea/screens/myPage/my_page.dart';
-import 'package:iea/screens/courseDetailPage/courseDetail_page.dart';
+// import 'package:iea/screens/courseDetailPage/courseDetail_page.dart';
 import 'package:iea/screens/myInfoPage/myInfo_page.dart';
 import 'package:iea/screens/policyPage/policy_page.dart';
 import 'package:iea/screens/homepage/home_page.dart';
 import 'package:iea/screens/splashPage/firstPage.dart';
 import 'package:iea/screens/splashPage/guidePage.dart';
 import 'package:iea/screens/splashPage/webView.dart';
+import 'package:iea/screens/openDetailPage/openDetail_page.dart';
 
 final routes = {
   '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
   '/courseExamAnswer': (context)=> CourseExamResultPage(),
-  '/detail': (context)=> CourseDetailPage(num: 1),
+  // '/detail': (context)=> CourseDetailPage(num: 1),
   '/feedback': (context)=> FeedbackPage(),
   '/player': (context) => PlayerPage(),
   '/phone': (context) => PhonePage(),
@@ -29,5 +30,6 @@ final routes = {
   '/home': (context) => HomePage(),
   '/first': (context) => FirstPage(),
   '/guide': (context) => GuidePage(),
-  '/webView': (context) => WebViewPage()
+  '/webView': (context) => WebViewPage(url: ''),
+  '/openDetail': (context) => OpenDetailPage(openClassId: '',)
 };

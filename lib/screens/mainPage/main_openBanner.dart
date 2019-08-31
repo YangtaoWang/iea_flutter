@@ -20,19 +20,25 @@ class _MainOpenBannerState extends State<MainOpenBanner> with AutomaticKeepAlive
   @override
   Widget build(BuildContext context) {
     return widget.openClassList.length == 0 ? Container() :
-    Container(
-      child: AspectRatio(
-        aspectRatio: 10.0 / 4.63,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: ExtendedImage.network(
-            widget.openClassList[0].bannerUrl,
-            cache: true,
-            enableLoadState: false,
-            fit: BoxFit.fill
+    GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, '/openDetail');
+      },
+      child: Container(
+        child: AspectRatio(
+          aspectRatio: 10.0 / 4.63,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: ExtendedImage.network(
+              widget.openClassList[0].bannerUrl,
+              cache: true,
+              enableLoadState: false,
+              fit: BoxFit.fill
+            )
           )
         )
       )
     );
+    
   }
 }

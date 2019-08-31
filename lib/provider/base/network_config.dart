@@ -58,4 +58,8 @@ class NetworkConfig {
   static final Map<String, String> myCoursePageApi = {
     'getMyCourse': hostUrl + 'course/courseList'
   };
+  static final Map<String, String> openDetailPageApi = {
+    'getDetail': hostUrl + 'course/openClassDetail',
+    'checkIn': hostUrl + 'course/enrollOpenClass'
+  };
 }

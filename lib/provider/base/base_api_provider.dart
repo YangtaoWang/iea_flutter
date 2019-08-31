@@ -1,5 +1,6 @@
 import 'dart:async';
 // import 'package:flutter/material.dart';
+import 'package:iea/models/loginPage_models/iosDeviceInfo_model.dart';
 import 'package:iea/provider/base/base_resp.dart';
 import 'package:dio/dio.dart';
 // import 'package:iea/provider/base/network_config.dart';
@@ -7,6 +8,7 @@ import 'package:iea/utils/sign_util.dart';
 import 'package:iea/utils/date_util.dart';
 // import 'package:iea/main.dart';
 import 'package:iea/sp/index.dart';
+import 'dart:convert' as convert;
 
 enum LoadingStatus { onLoading, offLoading }
 LoadingStatus _loadingStatus = LoadingStatus.offLoading;
@@ -47,13 +49,13 @@ class BaseApiProvider {
     dio.options.receiveTimeout = 3000;
     dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
     dio.interceptors
-        .add(InterceptorsWrapper(onRequest: (RequestOptions options) {
+        .add(InterceptorsWrapper(onRequest: (RequestOptions options) async{
       // Do something before request is sent
       if (_loadingStatus == LoadingStatus.offLoading) {
         _loadingStatus = LoadingStatus.onLoading;
       }
 
-      var addToken = true, addAuth = true;
+      var addToken = true, addAuth = true, addDeviceInfo = true;
 
       for (var i = 0; i < nonTokenUrls.length; i++) {
         if (options.uri.toString().indexOf(nonTokenUrls[i]) != -1) {
@@ -89,9 +91,19 @@ class BaseApiProvider {
         // options.queryParameters['sign'] = sign;
         if (addToken) {
           //  options.headers['a'] = LocalDataProvider.getInstance().getToken();
-          options.headers['a'] = SP().getData('a');
-          options.headers['authorization'] = SP().getData('authorization');
+          options.headers['a'] = await SP().getData('a');
+          options.headers['authorization'] = await SP().getData('authorization');
         }
+        if (addDeviceInfo) {
+          String res = await SP().getData('DeviceInfo'); 
+          IosDeviceInfoModel info = IosDeviceInfoModel.fromJson(convert.jsonDecode(res));
+          options.headers['deviceId'] = info.deviceId;
+          options.headers['appVersion'] = '1.1.1';
+          options.headers['deviceVersion'] = info.deviceVersion;
+          options.headers['deviceType'] = info.deviceType;
+          options.headers['channel_type'] = '1';
+        }
+        
       }
       return options; //continue
     }, onResponse: (Response response) {
