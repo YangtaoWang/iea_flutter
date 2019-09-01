@@ -19,12 +19,14 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
 import 'dart:convert' as convert;
+import 'package:iea/utils/service_locator.dart';
 
 // import 'models/loginPage_models/iosDeviceInfo_model.dart';
 
 
 void main() {
   // store.dispatch(LoginSuccessAction(token: 'new asfasfasfToken'));
+  setupLocator();
   runApp(MyApp(store));
 }
 
@@ -61,6 +63,7 @@ class MyApp extends StatelessWidget {
       }
     }
   }
+  // GlobalKey<NavigatorState> _navigatorKey = GlobalKey(debugLabel: 'navigate');
   @override
   Widget build(BuildContext context) {
     _getDeviceInfo();
@@ -74,6 +77,7 @@ class MyApp extends StatelessWidget {
       store: store,
       child: MaterialApp(
         title: 'Material App',
+        navigatorKey: getIt<NavigateService>().key,
         theme: ThemeData(
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Colors.white

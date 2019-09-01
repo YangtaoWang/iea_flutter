@@ -24,6 +24,12 @@ class _OpenDetailPageState extends State<OpenDetailPage> {
     Map<String, String> params = {'openClassId': widget.openClassId};
     _bloc.getOpenDetail(params);
   }
+
+  @override
+  void deactivate() {
+    _getOpenDetail();
+    super.deactivate();
+  }
   @override
   void initState() {
     _getOpenDetail();
@@ -46,7 +52,7 @@ class _OpenDetailPageState extends State<OpenDetailPage> {
             child: Container(
               width: 35,
               height: 15,
-              margin: EdgeInsets.only(right: 20, top: 10, bottom: 10),
+              margin: EdgeInsets.only(right: 20, top: 12, bottom: 12),
               child: Image.asset('assets/images/openDetail/actionsHome.png', width: 35, height: 15, fit: BoxFit.fill),
             )
           )

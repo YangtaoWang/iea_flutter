@@ -1,4 +1,20 @@
 class MyCourseModel {
+    List<PurchasedCourse> purchasedCourses;
+
+    MyCourseModel({
+        this.purchasedCourses,
+    });
+
+    factory MyCourseModel.fromJson(Map<String, dynamic> json) => new MyCourseModel(
+        purchasedCourses: new List<PurchasedCourse>.from(json["purchasedCourses"].map((x) => PurchasedCourse.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "purchasedCourses": new List<dynamic>.from(purchasedCourses.map((x) => x.toJson())),
+    };
+}
+
+class PurchasedCourse {
     int id;
     dynamic ocName;
     dynamic ocCover;
@@ -9,12 +25,13 @@ class MyCourseModel {
     String goName;
     String lessionCount;
     int isCourse;
-    String coId;
     String goId;
+    String coId;
     String serviceStartTime;
     String serviceEndTime;
+    String cover;
 
-    MyCourseModel({
+    PurchasedCourse({
         this.id,
         this.ocName,
         this.ocCover,
@@ -25,13 +42,14 @@ class MyCourseModel {
         this.goName,
         this.lessionCount,
         this.isCourse,
-        this.coId,
         this.goId,
+        this.coId,
         this.serviceStartTime,
         this.serviceEndTime,
+        this.cover,
     });
 
-    factory MyCourseModel.fromJson(Map<String, dynamic> json) => new MyCourseModel(
+    factory PurchasedCourse.fromJson(Map<String, dynamic> json) => new PurchasedCourse(
         id: json["id"],
         ocName: json["ocName"],
         ocCover: json["ocCover"],
@@ -42,10 +60,11 @@ class MyCourseModel {
         goName: json["goName"],
         lessionCount: json["lessionCount"],
         isCourse: json["isCourse"],
-        coId: json["coId"],
         goId: json["goId"],
+        coId: json["coId"],
         serviceStartTime: json["serviceStartTime"],
         serviceEndTime: json["serviceEndTime"],
+        cover: json["cover"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -59,9 +78,10 @@ class MyCourseModel {
         "goName": goName,
         "lessionCount": lessionCount,
         "isCourse": isCourse,
-        "coId": coId,
         "goId": goId,
+        "coId": coId,
         "serviceStartTime": serviceStartTime,
         "serviceEndTime": serviceEndTime,
+        "cover": cover,
     };
 }

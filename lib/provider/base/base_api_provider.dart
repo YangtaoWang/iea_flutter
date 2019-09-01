@@ -1,8 +1,10 @@
 import 'dart:async';
 // import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:iea/models/loginPage_models/iosDeviceInfo_model.dart';
 import 'package:iea/provider/base/base_resp.dart';
 import 'package:dio/dio.dart';
+import 'package:iea/utils/service_locator.dart';
 // import 'package:iea/provider/base/network_config.dart';
 import 'package:iea/utils/sign_util.dart';
 import 'package:iea/utils/date_util.dart';
@@ -118,6 +120,14 @@ class BaseApiProvider {
       }
       return response; // continue
     }, onError: (DioError e) {
+      print(e.response.statusCode == 401);
+      if (e.response.statusCode == 401) {
+        // print("@@@@@@@@@@@@@@");
+        // getIt<NavigateService>().pushNamed('/phone');
+        // Navigator.pushNamed(context, '/phone');
+        // return Navigator.of(context).push(new MaterialPageRoute(
+        // builder: (ctx) => new LoginPage()));//refreshToken过期，弹出登录页面
+      }
       if (_loadingStatus == LoadingStatus.onLoading) {
         _loadingStatus = LoadingStatus.offLoading;
         // Navigator.pop(MyApp.navigatorKey.currentState.overlay.context);
