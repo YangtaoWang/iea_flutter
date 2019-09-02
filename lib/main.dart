@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        title: 'Material App',
+        title: 'iea_flutter',
         navigatorKey: getIt<NavigateService>().key,
         theme: ThemeData(
           primarySwatch: Colors.blue,

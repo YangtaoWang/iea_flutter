@@ -7,8 +7,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <application android:name="io.flutter.app.FlutterApplication"
-        android:label="iea"
-        android:icon="@mipmap/ic_launcher">
+        android:label="iea_flutter"
+        android:icon="@mipmap/launcher">
      <activity
     android:name="com.yalantis.ucrop.UCropActivity"
     android:screenOrientation="portrait"

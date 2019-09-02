@@ -17,9 +17,11 @@ class _MyCoursePageState extends State<MyCoursePage> {
   MyCourseBloc _bloc = MyCourseBloc();
   _getMyCourse() async{
     String res = await SP().getData('userInfo');
-    UserInfo userInfo = UserInfo.fromJson(convert.jsonDecode(res));
-    Map<String, String> params = {'id': userInfo.id.toString()};
-    _bloc.getList(params);
+    if (res != null) {
+      UserInfo userInfo = UserInfo.fromJson(convert.jsonDecode(res));
+      Map<String, String> params = {'id': userInfo.id.toString()};
+      _bloc.getList(params);
+    }
   }
   @override 
   void deactivate() {
@@ -39,7 +41,6 @@ class _MyCoursePageState extends State<MyCoursePage> {
         if (snapshot.data != null && snapshot.hasData) {
           var response = snapshot.data;
           if (response.result == true && response.data != null) {
-            print(response.data.purchasedCourses);
             if (response.data.purchasedCourses.length == 0) {
               return Container(
                 height: MediaQuery.of(context).size.height,
