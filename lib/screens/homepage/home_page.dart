@@ -63,10 +63,11 @@ class _HomePageState extends State<HomePage> {
           )
         ] : <Widget>[],
       ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: widgetItems,
-      ),
+      body: widgetItems[_currentIndex],
+      // body: IndexedStack(
+      //   index: _currentIndex,
+      //   children: widgetItems,
+      // ),
       // 底部导航
       bottomNavigationBar: BottomNavigationBar(
         items: [

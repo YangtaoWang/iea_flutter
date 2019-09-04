@@ -3,17 +3,21 @@ import 'package:iea/blocs/myCoursePage_blocs/myCourse_bloc.dart';
 import 'package:iea/models/loginPage_models/userInfo_model.dart';
 import 'package:iea/provider/base/base_resp.dart';
 import 'package:iea/sp/index.dart';
+// import 'package:iea/utils/service_locator.dart';
 import 'dart:convert' as convert;
-
 import 'package:iea/widgets/error.dart';
 import 'package:iea/widgets/loading.dart';
+import 'package:extended_image/extended_image.dart';
 
 class MyCoursePage extends StatefulWidget {
   MyCoursePage({Key key}) : super(key: key);
   _MyCoursePageState createState() => _MyCoursePageState();
 }
 
-class _MyCoursePageState extends State<MyCoursePage> {
+class _MyCoursePageState extends State<MyCoursePage> with AutomaticKeepAliveClientMixin<MyCoursePage> {
+  @override
+  bool get wantKeepAlive => true;
+
   MyCourseBloc _bloc = MyCourseBloc();
   _getMyCourse() async{
     String res = await SP().getData('userInfo');
@@ -23,9 +27,11 @@ class _MyCoursePageState extends State<MyCoursePage> {
       _bloc.getList(params);
     }
   }
-  @override 
-  void deactivate() {
-    _getMyCourse();
+  // @override 
+  void deactivate() async{
+    if(await SP().getData('a') != null){ // 避免401跳转时，循环调用
+      _getMyCourse();
+    }
     super.deactivate();
   }
   @override
@@ -35,6 +41,7 @@ class _MyCoursePageState extends State<MyCoursePage> {
   }
   @override
   Widget build(BuildContext context) {
+    // return ErrorPage(errorCallback: _getMyCourse);
     return StreamBuilder<BaseResp>(
       stream: _bloc.myCourse,
       builder: (BuildContext context, AsyncSnapshot<BaseResp> snapshot){
@@ -80,8 +87,15 @@ class _MyCoursePageState extends State<MyCoursePage> {
                                   child: Stack(
                                     children: <Widget>[
                                       ClipRRect(
-                                        child: Image.network(response.data.purchasedCourses[index].cover, width: 145, height: 81, fit: BoxFit.cover),
-                                        borderRadius: BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(5.0),
+                                        child: ExtendedImage.network(
+                                          response.data.purchasedCourses[index].cover,
+                                          cache: true,
+                                          enableLoadState: false,
+                                          fit: BoxFit.fill,
+                                          width: 145,
+                                          height: 81,
+                                        )
                                       ),
                                       Positioned(
                                         left: 0,
@@ -116,11 +130,21 @@ class _MyCoursePageState extends State<MyCoursePage> {
                                             mainAxisAlignment: MainAxisAlignment.start,
                                             children: <Widget>[
                                               ClipOval(
-                                                child: Image.network(response.data.purchasedCourses[index].avatarUrl, width: 28, height: 28, fit: BoxFit.cover,),
+                                                child: ExtendedImage.network(
+                                                  response.data.purchasedCourses[index].avatarUrl,
+                                                  cache: true,
+                                                  enableLoadState: false,
+                                                  fit: BoxFit.fill,
+                                                  width: 28,
+                                                  height: 28,
+                                                ),
                                               ),
-                                              Container(
-                                                margin: EdgeInsets.only(left: 13),
-                                                child: Text(response.data.purchasedCourses[index].tname, style: TextStyle(fontSize: 14, color: Color.fromRGBO(102, 102, 102, 1))),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Container(
+                                                  margin: EdgeInsets.only(left: 13),
+                                                  child: Text(response.data.purchasedCourses[index].tname, style: TextStyle(fontSize: 14, color: Color.fromRGBO(102, 102, 102, 1)), maxLines: 1, overflow: TextOverflow.ellipsis,),
+                                                )
                                               )
                                             ],
                                           ) : Row(
@@ -159,7 +183,7 @@ class _MyCoursePageState extends State<MyCoursePage> {
               );
             }
             } else {
-            return ErrorPage();
+              return ErrorPage(tokenNum: response.code, errorCallback: _getMyCourse);
           }
         } else {
           return LoadingPage();

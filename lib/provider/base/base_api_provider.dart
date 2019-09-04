@@ -11,6 +11,7 @@ import 'package:iea/utils/date_util.dart';
 // import 'package:iea/main.dart';
 import 'package:iea/sp/index.dart';
 import 'dart:convert' as convert;
+import 'package:fluttertoast/fluttertoast.dart';
 
 enum LoadingStatus { onLoading, offLoading }
 LoadingStatus _loadingStatus = LoadingStatus.offLoading;
@@ -108,32 +109,32 @@ class BaseApiProvider {
         
       }
       return options; //continue
-    }, onResponse: (Response response) {
+    }, onResponse: (Response response) async {
       if (_loadingStatus == LoadingStatus.onLoading) {
         _loadingStatus = LoadingStatus.offLoading;
         //  Navigator.pop(MyApp.navigatorKey.currentState.overlay.context);
       }
 
       if (response.headers['authorization'] is List &&  response.headers['authorization'].toString() != '[]') {
-        SP().saveData('authorization', response.headers['authorization'][0]);
-        SP().saveData('a', response.headers['a'][0]);
+        await SP().saveData('authorization', response.headers['authorization'][0]);
+        await SP().saveData('a', response.headers['a'][0]);
       }
       return response; // continue
-    }, onError: (DioError e) {
+    }, onError: (DioError e) async{
       print(e.response.statusCode == 401);
       if (e.response.statusCode == 401) {
-        // print("@@@@@@@@@@@@@@");
-        // getIt<NavigateService>().pushNamed('/phone');
-        // Navigator.pushNamed(context, '/phone');
-        // return Navigator.of(context).push(new MaterialPageRoute(
-        // builder: (ctx) => new LoginPage()));//refreshToken过期，弹出登录页面
+        Fluttertoast.showToast(msg: "账号在其他设备登录，请重新登录",toastLength: Toast.LENGTH_LONG,gravity: ToastGravity.CENTER,timeInSecForIos: 1,backgroundColor: Color.fromRGBO(0, 0, 0, .5),textColor: Color.fromRGBO(255, 255, 255, 1),fontSize: 12.0);
+        await SP().removeData('a');
+        await SP().removeData('authorization');
+        await SP().removeData('userInfo');
+        getIt<NavigateService>().pushNamed('/phone');
       }
       if (_loadingStatus == LoadingStatus.onLoading) {
         _loadingStatus = LoadingStatus.offLoading;
         // Navigator.pop(MyApp.navigatorKey.currentState.overlay.context);
       }
       // Fluttertoast.showToast(msg: e.response.data['msg']);
-      return _onError(e); //continue
+      return _handleError(e); //continue
     }));
   }
 
@@ -193,7 +194,8 @@ class BaseApiProvider {
     }
 
     return Response(data: {
-      "code": CustomRespCode.networkFail,
+      // "code": CustomRespCode.networkFail,
+      "code": error.response.statusCode,
       "result": false,
       "data": errorDescription
     });

@@ -12,5 +12,8 @@ class NavigateService {
   NavigatorState get navigator => key.currentState;
 
   get pushNamed => navigator.pushNamed;
+  get pushReplacementNamed => navigator.pushReplacementNamed;
+  get pushNamedAndRemoveUntil => navigator.pushNamedAndRemoveUntil;
+  get popAndPushNamed => navigator.popAndPushNamed;
   get push => navigator.push;
 }

@@ -3,7 +3,8 @@ class SP {
   Map<String, String> _spType = {
     'userInfo': 'Map',
     'a': 'String',
-    'authorization': 'String'
+    'authorization': 'String',
+    'DeviceInfo': 'Map'
   };
   /*
    * 存储数据

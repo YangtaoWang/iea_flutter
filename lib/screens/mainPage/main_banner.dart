@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:iea/models/indexPage_models/index_openCourse_model.dart';
 import 'package:extended_image/extended_image.dart';
