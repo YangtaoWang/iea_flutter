@@ -257,7 +257,7 @@ class _MyInfoPageState extends State<MyInfoPage> {
                         inputFormatters: <TextInputFormatter>[
                           WhitelistingTextInputFormatter(RegExp('[A-Za-z0-9\u4e00-\u9fa5-_]'))
                         ],
-                        keyboardType: TextInputType.number,
+                        // keyboardType: TextInputType.number,
                         style: TextStyle(color: Color.fromRGBO(153, 153, 153, 1), fontSize: 14),
                         cursorColor: Colors.black,
                         decoration: InputDecoration(
