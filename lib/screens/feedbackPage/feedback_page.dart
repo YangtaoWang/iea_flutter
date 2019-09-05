@@ -5,6 +5,7 @@ import 'package:iea/widgets/style_widget.dart';
 import 'package:iea/blocs/feedbackPage_blocs/postFeedback_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iea/provider/base/base_resp.dart';
+// import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 class FeedbackPage extends StatefulWidget {
   FeedbackPage({Key key}) : super(key: key);
 
@@ -19,6 +20,10 @@ class _FeedbackPageState extends State<FeedbackPage> {
   _postFeedback(){
     Map<String, String> params = {'type': '1', 'phone': _controller2.text, 'feedback': _controller.text};
     _bloc.postFeedback(params);
+  }
+  @override
+  void initState() {
+    super.initState();
   }
   @override
   Widget build(BuildContext context) {

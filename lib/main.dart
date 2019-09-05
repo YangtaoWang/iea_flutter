@@ -5,7 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:iea/redux/index.dart';
 import 'package:iea/redux/appState.dart';
 import 'package:iea/router/index.dart';
-import 'package:iea/screens/openDetailPage/openDetail_page.dart';
+// import 'package:iea/screens/openDetailPage/openDetail_page.dart';
 // import 'package:iea/redux/AppState.dart';
 // import 'package:iea/redux/AppReducer.dart';
 // import 'package:iea/redux/reducer.dart';
@@ -20,6 +20,7 @@ import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
 import 'dart:convert' as convert;
 import 'package:iea/utils/service_locator.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 // import 'models/loginPage_models/iosDeviceInfo_model.dart';
 
@@ -67,6 +68,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _getDeviceInfo();
+    FlutterStatusbarcolor.setStatusBarWhiteForeground(false);
     // debugPaintSizeEnabled = true;
     if (Platform.isAndroid) {
       // 以下两行 设置android状态栏为透明的沉浸。写在组件渲染之后，是为了在渲染后进行set赋值，覆盖状态栏，写在渲染之前MaterialApp组件会覆盖掉这个值。
