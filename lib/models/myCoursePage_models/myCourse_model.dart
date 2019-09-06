@@ -26,7 +26,7 @@ class PurchasedCourse {
     String lessionCount;
     int isCourse;
     String goId;
-    String coId;
+    String ocId;
     String serviceStartTime;
     String serviceEndTime;
     String cover;
@@ -43,7 +43,7 @@ class PurchasedCourse {
         this.lessionCount,
         this.isCourse,
         this.goId,
-        this.coId,
+        this.ocId,
         this.serviceStartTime,
         this.serviceEndTime,
         this.cover,
@@ -61,7 +61,7 @@ class PurchasedCourse {
         lessionCount: json["lessionCount"],
         isCourse: json["isCourse"],
         goId: json["goId"],
-        coId: json["coId"],
+        ocId: json["ocId"],
         serviceStartTime: json["serviceStartTime"],
         serviceEndTime: json["serviceEndTime"],
         cover: json["cover"],
@@ -79,7 +79,7 @@ class PurchasedCourse {
         "lessionCount": lessionCount,
         "isCourse": isCourse,
         "goId": goId,
-        "coId": coId,
+        "ocId": ocId,
         "serviceStartTime": serviceStartTime,
         "serviceEndTime": serviceEndTime,
         "cover": cover,

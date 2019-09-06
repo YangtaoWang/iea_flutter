@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:iea/models/indexPage_models/index_openClass_model.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:iea/screens/openDetailPage/openDetail_page.dart';
 
 class MainOpenBanner extends StatefulWidget {
   final List<IndexOpenClassModel> openClassList;
@@ -22,7 +23,9 @@ class _MainOpenBannerState extends State<MainOpenBanner> with AutomaticKeepAlive
     return widget.openClassList.length == 0 ? Container() :
     GestureDetector(
       onTap: (){
-        Navigator.pushNamed(context, '/openDetail');
+        Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+          return OpenDetailPage(openClassId: widget.openClassList[0].openClassId.toString());
+        }));
       },
       child: Container(
         child: AspectRatio(

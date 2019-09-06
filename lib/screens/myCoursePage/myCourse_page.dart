@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iea/blocs/myCoursePage_blocs/myCourse_bloc.dart';
 import 'package:iea/models/loginPage_models/userInfo_model.dart';
 import 'package:iea/provider/base/base_resp.dart';
+import 'package:iea/screens/goodDetailPage/goodDetai_page.dart';
+import 'package:iea/screens/openDetailPage/openDetail_page.dart';
 import 'package:iea/sp/index.dart';
 // import 'package:iea/utils/service_locator.dart';
 import 'dart:convert' as convert;
@@ -71,7 +73,15 @@ class _MyCoursePageState extends State<MyCoursePage> with AutomaticKeepAliveClie
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/player');
+                        if (response.data.purchasedCourses[index].isCourse == 1) {
+                          Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+                            return OpenDetailPage(openClassId: response.data.purchasedCourses[index].ocId);
+                          }));
+                        } else {
+                          Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+                            return GoodDetailPage(goodsId: response.data.purchasedCourses[index].goId);
+                          }));
+                        }
                       },
                       child: Container(
                         height: 120,

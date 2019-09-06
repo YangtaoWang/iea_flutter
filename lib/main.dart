@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iea/screens/goodDetailPage/goodDetai_page.dart';
 import 'package:iea/screens/splashPage/firstPage.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -13,7 +14,7 @@ import 'package:iea/router/index.dart';
 // import 'package:iea/redux/appActions.dart';
 // import 'dart:io';
 // import 'package:flutter/services.dart';
-// import 'package:flutter/rendering.dart';
+import 'package:flutter/rendering.dart';
 import 'package:iea/sp/index.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
@@ -84,7 +85,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Colors.white
         ),
-        // home: OpenDetailPage(),
+        // home: GoodDetailPage(),
         home: FirstPage(),
         routes: routes,
       )

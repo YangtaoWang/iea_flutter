@@ -62,4 +62,7 @@ class NetworkConfig {
     'getDetail': hostUrl + 'course/openClassDetail',
     'checkIn': hostUrl + 'course/enrollOpenClass'
   };
+  static final Map<String, String> goodDetailPageApi = {
+    'goodDetail': hostUrl + 'course/goodsDetail'
+  };
 }

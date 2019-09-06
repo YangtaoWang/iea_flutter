@@ -9,6 +9,7 @@ class IndexGoodCourseModel {
     dynamic h5Url;
     dynamic linkType;
     dynamic isDiscount;
+    dynamic goId;
 
     IndexGoodCourseModel({
         this.id,
@@ -21,6 +22,7 @@ class IndexGoodCourseModel {
         this.h5Url,
         this.linkType,
         this.isDiscount,
+        this.goId,
     });
 
     factory IndexGoodCourseModel.fromJson(Map<String, dynamic> json) => new IndexGoodCourseModel(
@@ -34,6 +36,7 @@ class IndexGoodCourseModel {
         h5Url: json["h5Url"],
         linkType: json["linkType"],
         isDiscount: json["isDiscount"],
+        goId: json["goId"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -47,5 +50,6 @@ class IndexGoodCourseModel {
         "h5Url": h5Url,
         "linkType": linkType,
         "isDiscount": isDiscount,
+        "goId": goId
     };
 }

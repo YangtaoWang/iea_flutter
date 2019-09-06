@@ -14,6 +14,7 @@ import 'package:iea/screens/splashPage/firstPage.dart';
 import 'package:iea/screens/splashPage/guidePage.dart';
 import 'package:iea/screens/splashPage/webView.dart';
 import 'package:iea/screens/openDetailPage/openDetail_page.dart';
+import 'package:iea/screens/goodDetailPage/goodDetai_page.dart';
 
 final routes = {
   '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
@@ -31,5 +32,6 @@ final routes = {
   '/first': (context) => FirstPage(),
   '/guide': (context) => GuidePage(),
   '/webView': (context) => WebViewPage(url: ''),
-  '/openDetail': (context) => OpenDetailPage(openClassId: '',)
+  '/openDetail': (context) => OpenDetailPage(openClassId: '',),
+  '/goodDetail': (context) => GoodDetailPage(goodsId: '',)
 };

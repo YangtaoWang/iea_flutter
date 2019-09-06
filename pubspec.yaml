@@ -123,6 +123,20 @@ flutter:
    - assets/images/openDetail/consult.png
    - assets/images/openDetail/course_consult.png
    - assets/images/openDetail/actionsHome.png
+
+   - assets/images/goodDetail/icon_course_flag_unsel.png
+   - assets/images/goodDetail/icon_course_flag_sel.png
+   - assets/images/goodDetail/icon_course_card_unsel.png
+   - assets/images/goodDetail/icon_course_state_play.png
+   - assets/images/goodDetail/icon_course_state_lock.png
+   - assets/images/goodDetail/icon_play_status_unplay.png
+   - assets/images/goodDetail/icon_play_status_play.png
+   - assets/images/goodDetail/icon_course_bottom_arrow.png
+   - assets/images/goodDetail/icon_course_top_arrow.png
+   - assets/images/goodDetail/icon_course_teacher_default_photo.png
+   
+   
+   
    
   fonts:
     - family: iconfont

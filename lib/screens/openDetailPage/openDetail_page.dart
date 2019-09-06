@@ -177,7 +177,7 @@ class _OpenDetailPageState extends State<OpenDetailPage> {
                         decoration: BoxDecoration(
                           color: response.data.bottomStatus == '3' ? Colors.transparent : Colors.white
                         ),
-                        child: ConsultAndPlay(isBuied: response.data.bottomStatus == 4, isOn: response.data.bottomStatus == 3, openDetail: response.data)
+                        child: ConsultAndPlay(isBuied: response.data.bottomStatus == 4, isOn: response.data.bottomStatus == 3, openDetail: response.data, openClassId: widget.openClassId,)
                       ),
                     )
                   ],
@@ -200,14 +200,15 @@ class ConsultAndPlay extends StatefulWidget {
   bool isBuied;
   final bool isOn;
   final OpenDetailModel openDetail;
-  ConsultAndPlay({Key key, @required this.isBuied, @required this.isOn, @required this.openDetail}) : super(key: key);
+  final String openClassId;
+  ConsultAndPlay({Key key, @required this.isBuied, @required this.isOn, @required this.openDetail, @required this.openClassId}) : super(key: key);
   _ConsultAndPlayState createState() => _ConsultAndPlayState();
 }
 
 class _ConsultAndPlayState extends State<ConsultAndPlay> {
   bool _isLogin;
   _checkIn() async{
-    Map<String, String> params = {'openClassId': '136'};
+    Map<String, String> params = {'openClassId': widget.openClassId};
     final res = await OpenDetailPageApiProvider().checkIn(params);
     _changeStatusByRes(res.code);
   }
