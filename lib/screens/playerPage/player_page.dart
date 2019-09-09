@@ -3,8 +3,12 @@ import 'package:iea/screens/playerPage/player_teacherDes.dart';
 import 'package:iea/screens/playerPage/player_courseService.dart';
 import 'package:chewie/chewie.dart';
 import 'package:video_player/video_player.dart';
+import 'package:iea/blocs/playerPage_blocs/player_bloc.dart';
 class PlayerPage extends StatefulWidget {
-  PlayerPage({Key key}) : super(key: key);
+  final int goodsId;
+  final int videoId;
+  final int moduleLessonId;
+  PlayerPage({Key key, @required this.goodsId, @required this.videoId, @required this.moduleLessonId}) : super(key: key);
   _PlayerPageState createState() => _PlayerPageState();
 }
 
@@ -18,6 +22,19 @@ class _PlayerPageState extends State<PlayerPage> {
     placeholder: Image.network('https://xszx-test-1251987637.cosbj.myqcloud.com/file/20190614/fe82d65bf5464498b389632f82197983.png')
   );
   int currentTab = 1;
+   PlayerBloc _bloc = PlayerBloc();
+  _getPlayer(){
+    Map<String, dynamic> params = {'goodsId': widget.goodsId, 'videoId': widget.videoId, 'moduleLessonId': widget.moduleLessonId};
+    print(widget.goodsId);
+    print(widget.videoId);
+    print(widget.moduleLessonId);
+    _bloc.getPlayer(params);
+  }
+  @override
+  void initState() {
+    // _getPlayer();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,27 +54,7 @@ class _PlayerPageState extends State<PlayerPage> {
                 // color: Color.fromRGBO(51, 51, 51, .3)
               ),
               child: new Chewie(
-                controller: chewieController,
-                  // new VideoPlayerController.network(this.url),
-                  // aspectRatio: 16 / 9,
-                  // autoPlay: !true,
-                  // looping: true,
-                  // showControls: true,
-                  // // 占位图
-                  // placeholder: new Container(
-                  //     color: Colors.grey,
-                  // ),
-
-                  // // 是否在 UI 构建的时候就加载视频
-                  // autoInitialize: !true,
-
-                  // // 拖动条样式颜色
-                  // materialProgressColors: new ChewieProgressColors(
-                  //     playedColor: Colors.red,
-                  //     handleColor: Colors.blue,
-                  //     backgroundColor: Colors.grey,
-                  //     bufferedColor: Colors.lightGreen,
-                  // ),
+                controller: chewieController
               ),
             ),
             Container(

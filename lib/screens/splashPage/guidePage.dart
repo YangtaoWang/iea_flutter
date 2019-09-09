@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:iea/screens/splashPage/web.dart';
 import 'package:iea/screens/splashPage/webView.dart';
 // import 'package:extended_image/extended_image.dart';
 
@@ -57,8 +58,11 @@ class _GuideSwiperState extends State<GuideSwiper> {
         if (index == 2) {
           Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => route == null);
         } else {
+          // Navigator.pushReplacement(context, new MaterialPageRoute(builder: (BuildContext context){
+          //   return WebViewPage(url: 'https://www.baidu.com');
+          // }));
           Navigator.pushReplacement(context, new MaterialPageRoute(builder: (BuildContext context){
-            return WebViewPage(url: 'https://www.baidu.com');
+            return WebPage(url: 'https://youngtao.wang/test/#a=1&authorition=asfasf', fromPage: 'guide');
           }));
         }
       },// 点击事件 onTap
@@ -67,7 +71,6 @@ class _GuideSwiperState extends State<GuideSwiper> {
           builder: DotSwiperPaginationBuilder(
             activeColor: Colors.white,
             color: Color.fromRGBO(255, 255, 255, 0.51)
-            
         )) // 两张图片之间的间隔
     );
   }

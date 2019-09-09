@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iea/screens/goodDetailPage/goodDetai_page.dart';
+// import 'package:iea/screens/goodDetailPage/goodDetai_page.dart';
 import 'package:iea/screens/splashPage/firstPage.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -22,6 +22,8 @@ import 'package:device_info/device_info.dart';
 import 'dart:convert' as convert;
 import 'package:iea/utils/service_locator.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+// import 'package:iea/screens/test/testPage.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 
 // import 'models/loginPage_models/iosDeviceInfo_model.dart';
 
@@ -29,7 +31,24 @@ import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 void main() {
   // store.dispatch(LoginSuccessAction(token: 'new asfasfasfToken'));
   setupLocator();
+  // _initJPush();
   runApp(MyApp(store));
+}
+_initJPush(){
+  JPush jpush = new JPush();
+  jpush.setup(appKey: '2d1c44f2ec1d576aa9ec7d29' ,channel: 'developer-default');
+  // 监听jpush
+  jpush.addEventHandler(
+      onReceiveNotification: (Map<String, dynamic> message) async {
+        print("flutter 接收到推送: $message");
+      },
+      onOpenNotification: (message) {
+        // 点击通知栏消息，在此时通常可以做一些页面跳转等
+        print(message);
+        getIt<NavigateService>().pushNamed('/feedback');
+        return ;
+      },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -85,7 +104,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Colors.white
         ),
-        // home: GoodDetailPage(),
+        // home: TestPage(),
         home: FirstPage(),
         routes: routes,
       )

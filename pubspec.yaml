@@ -50,6 +50,9 @@ dependencies:
   device_info: ^0.4.0+2
   get_it: ^2.0.3
   flutter_statusbarcolor: ^0.2.1
+  webview_flutter: ^0.3.13
+  easy_contact_picker: ^0.0.2
+  jpush_flutter: ^0.1.0
   # flutter_image_compress: ^0.6.3
 
 dev_dependencies:

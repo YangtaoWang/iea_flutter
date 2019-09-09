@@ -2,6 +2,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:iea/provider/base/base_resp.dart';
+import 'package:iea/screens/playerPage/player_page.dart';
 import 'package:iea/sp/index.dart';
 import 'package:iea/widgets/error.dart';
 import 'package:iea/widgets/loading.dart';
@@ -53,332 +54,346 @@ class _GoodDetailPageState extends State<GoodDetailPage> {
           )
         ],
       ),
-      body: StreamBuilder<BaseResp>(
-        stream: _bloc.goodDetail,
-        builder: (context, AsyncSnapshot<BaseResp> snapshot) {
-        if (snapshot.data != null && snapshot.hasData) {
-            var response = snapshot.data;
-            if (response.result == true && response.data != null) {
-              GoodDetailModle goodDetai = response.data;
-                return Container(
-                  child: Stack(
-                    children: <Widget>[
-                      ListView(
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(bottom: 12),
-                            child: AspectRatio(
-                              aspectRatio: 10.0 / 5.60,
-                              child: ExtendedImage.network(
-                                goodDetai.cover,
-                                cache: true,
-                                enableLoadState: false,
-                                fit: BoxFit.fill
-                              ),
-                            )
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.5),
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  alignment: FractionalOffset.topLeft,
-                                  margin: EdgeInsets.only(bottom: 10),
-                                  child: Text(goodDetai.name, style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1), fontSize: 24, fontWeight: FontWeight.w500), maxLines: 2,),
+      body: SafeArea(
+        child: StreamBuilder<BaseResp>(
+          stream: _bloc.goodDetail,
+          builder: (context, AsyncSnapshot<BaseResp> snapshot) {
+          if (snapshot.data != null && snapshot.hasData) {
+              var response = snapshot.data;
+              if (response.result == true && response.data != null) {
+                GoodDetailModle goodDetai = response.data;
+                  return Container(
+                    child: Stack(
+                      children: <Widget>[
+                        ListView(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(bottom: 12),
+                              child: AspectRatio(
+                                aspectRatio: 10.0 / 5.60,
+                                child: ExtendedImage.network(
+                                  goodDetai.cover,
+                                  cache: true,
+                                  enableLoadState: false,
+                                  fit: BoxFit.fill
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        Container(child: Text('￥' + goodDetai.price.round().toString(), style:TextStyle(fontSize: 27, color: Color.fromRGBO(243, 110, 34, 1))),),
-                                        Opacity(opacity: goodDetai.discountPrice == null ? 0 : 1, child: Container(margin: EdgeInsets.only(left: 19), child: Text('￥' + (goodDetai.discountPrice == null ? '' : goodDetai.discountPrice), style:TextStyle(fontSize: 14, color: Color.fromRGBO(153, 153, 153, 1), decoration: TextDecoration.lineThrough)),))
-                                      ],
-                                    ),
-                                    Text((goodDetai.learnerCount/10000).toString().substring(0,3) + '万次学习', style: TextStyle(fontSize: 14, color: Color.fromRGBO(153, 153, 153, 1)))
-                                  ],
-                                )
-                              ],
+                              )
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 15),
-                            child: Container(
-                              margin: EdgeInsets.only(top: 28),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.end,
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 12.5),
+                              child: Column(
                                 children: <Widget>[
                                   Container(
-                                    child: Column(
-                                      children: <Widget>[
-                                        Text('课程列表', style: TextStyle(fontSize: 19, color: Color.fromRGBO(51, 51, 51, 1), fontWeight: FontWeight.w500)),
-                                        Opacity(
-                                          opacity: 1,
-                                          child: Container(width: 24, height: 3, decoration: BoxDecoration(color: Color.fromRGBO(243, 110, 34, 1), borderRadius: BorderRadius.circular(47)),)
-                                        )
-                                      ],
-                                    ),
+                                    alignment: FractionalOffset.topLeft,
+                                    margin: EdgeInsets.only(bottom: 10),
+                                    child: Text(goodDetai.name, style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1), fontSize: 24, fontWeight: FontWeight.w500), maxLines: 2,),
                                   ),
-                                  Container(
-                                    margin: EdgeInsets.only(left: 37),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Text('课程介绍', style: TextStyle(fontSize: 15, color: Color.fromRGBO(159, 159, 159, 1))),
-                                        Opacity(
-                                          opacity: 0,
-                                          child: Container(width: 24, height: 3, decoration: BoxDecoration(color: Color.fromRGBO(243, 110, 34, 1), borderRadius: BorderRadius.circular(47)),)
-                                        )
-                                      ],
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Container(child: Text('￥' + goodDetai.price.round().toString(), style:TextStyle(fontSize: 27, color: Color.fromRGBO(243, 110, 34, 1))),),
+                                          Opacity(opacity: goodDetai.discountPrice == null ? 0 : 1, child: Container(margin: EdgeInsets.only(left: 19), child: Text('￥' + (goodDetai.discountPrice == null ? '' : goodDetai.discountPrice), style:TextStyle(fontSize: 14, color: Color.fromRGBO(153, 153, 153, 1), decoration: TextDecoration.lineThrough)),))
+                                        ],
+                                      ),
+                                      Text((goodDetai.learnerCount/10000).toString().substring(0,3) + '万次学习', style: TextStyle(fontSize: 14, color: Color.fromRGBO(153, 153, 153, 1)))
+                                    ],
                                   )
                                 ],
                               ),
-                            )
-                          ),
-                          Container(
-                            height: 6,
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(247, 247, 247, 1)
                             ),
-                          ),
-                          Opacity(
-                            opacity: goodDetai.courseModuleList.length > 0 ? 1 : 0,
-                            child: Padding(
+                            Padding(
                               padding: EdgeInsets.only(left: 15),
                               child: Container(
-                                height: 43,
-                                child: Container(margin: EdgeInsets.only(top: 19), child: Text('全部课时：'+ goodDetai.lessonCount.toString() +'节课（有效期'+ goodDetai.serviceDays.toString() +'天）', style: TextStyle(fontSize: 13, color: Color.fromRGBO(153, 153, 153, 1))))
-                              )
-                            ),
-                          ),
-                          Opacity(
-                            opacity: goodDetai.courseModuleList.length > 0 ? 1 : 0,
-                              child: Container(
-                              height: 86,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: goodDetai.courseModuleList.length,
-                                itemBuilder: (context, index){
-                                  return GestureDetector(
-                                    onTap: () {
-                                      this.setState((){
-                                        _currentSeries = index;
-                                      });
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.only(left: index == 0 ? 15 : 9, right: index == 5 ? 15 : 0, top: 14, bottom: 14),
-                                      width: 145,
-                                      height: 61,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(index == _currentSeries ? '' : 'assets/images/goodDetail/icon_course_card_unsel.png'),
-                                          fit: BoxFit.cover
-                                        ),
-                                        borderRadius: BorderRadius.circular(4),
-                                        boxShadow: [BoxShadow(blurRadius: 11, color: Color.fromRGBO(192, 192, 192, 0.5), offset: Offset(0, 2))],
-                                        gradient: LinearGradient(colors: [Color.fromRGBO(234, 189, 176, 1), Color. fromRGBO(243, 110, 34, .5)], begin: Alignment.centerLeft, end: Alignment.centerRight)
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                margin: EdgeInsets.only(top: 28),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Column(
                                         children: <Widget>[
-                                          Container(
-                                            width: 21,
-                                            height: 27,
-                                            margin: EdgeInsets.only(left: 9, right: 10),
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: AssetImage(index == _currentSeries ? 'assets/images/goodDetail/icon_course_flag_sel.png': 'assets/images/goodDetail/icon_course_flag_unsel.png')
-                                              )
-                                            ),
-                                            alignment: FractionalOffset.center,
-                                            child: Text((index + 1).toString(), style: TextStyle(color: index == _currentSeries ? Colors.white : Color.fromRGBO(153, 153, 153, 1), fontSize: 13),),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Container(
-                                              margin: EdgeInsets.only(right: 2),
-                                              child: Text(goodDetai.courseModuleList[index].moduleName, style: TextStyle(fontSize: 13, color: index == _currentSeries ? Colors.white : Color.fromRGBO(153, 153, 153, 1)), maxLines: 2, overflow: TextOverflow.ellipsis,),
-                                            )
+                                          Text('课程列表', style: TextStyle(fontSize: 19, color: Color.fromRGBO(51, 51, 51, 1), fontWeight: FontWeight.w500)),
+                                          Opacity(
+                                            opacity: 1,
+                                            child: Container(width: 24, height: 3, decoration: BoxDecoration(color: Color.fromRGBO(243, 110, 34, 1), borderRadius: BorderRadius.circular(47)),)
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.only(left: 37),
+                                      child: Column(
+                                        children: <Widget>[
+                                          Text('课程介绍', style: TextStyle(fontSize: 15, color: Color.fromRGBO(159, 159, 159, 1))),
+                                          Opacity(
+                                            opacity: 0,
+                                            child: Container(width: 24, height: 3, decoration: BoxDecoration(color: Color.fromRGBO(243, 110, 34, 1), borderRadius: BorderRadius.circular(47)),)
                                           )
                                         ],
                                       ),
                                     )
-                                  );
-                                }
+                                  ],
+                                ),
+                              )
+                            ),
+                            Container(
+                              height: 6,
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(247, 247, 247, 1)
                               ),
                             ),
-                          ),
-                          Opacity(
-                            opacity: goodDetai.courseModuleList.length > 0 ? 1 : 0,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 15),
-                              child: Container(
+                            Opacity(
+                              opacity: goodDetai.courseModuleList.length > 0 ? 1 : 0,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 15),
+                                child: Container(
+                                  height: 43,
+                                  child: Container(margin: EdgeInsets.only(top: 19), child: Text('全部课时：'+ goodDetai.lessonCount.toString() +'节课（有效期'+ goodDetai.serviceDays.toString() +'天）', style: TextStyle(fontSize: 13, color: Color.fromRGBO(153, 153, 153, 1))))
+                                )
+                              ),
+                            ),
+                            Opacity(
+                              opacity: goodDetai.courseModuleList.length > 0 ? 1 : 0,
+                                child: Container(
+                                height: 86,
                                 child: ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: _dropDown ? goodDetai.courseModuleList[_currentSeries].lessonList.length : goodDetai.courseModuleList[_currentSeries].lessonList.length > 4 ? 4 : goodDetai.courseModuleList[_currentSeries].lessonList.length,
-                                  physics: ScrollPhysics(),
-                                  itemBuilder: (context, index) {
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: goodDetai.courseModuleList.length,
+                                  itemBuilder: (context, index){
                                     return GestureDetector(
                                       onTap: () {
-                                        if (goodDetai.courseModuleList[_currentSeries].lessonList[index].isWatch == 2) return;
-                                        Navigator.pushNamed(context, '/player');
+                                        this.setState((){
+                                          _currentSeries = index;
+                                        });
                                       },
                                       child: Container(
+                                        margin: EdgeInsets.only(left: index == 0 ? 15 : 9, right: index == 5 ? 15 : 0, top: 14, bottom: 14),
+                                        width: 145,
+                                        height: 61,
+                                        decoration: index == _currentSeries
+                                        ? BoxDecoration(
+                                          borderRadius: BorderRadius.circular(4),
+                                          boxShadow: [BoxShadow(blurRadius: 11, color: Color.fromRGBO(192, 192, 192, 0.5), offset: Offset(0, 2))],
+                                          gradient: LinearGradient(colors: [Color.fromRGBO(234, 189, 176, 1), Color. fromRGBO(243, 110, 34, .5)], begin: Alignment.centerLeft, end: Alignment.centerRight)
+                                        )
+                                        : BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage('assets/images/goodDetail/icon_course_card_unsel.png'),
+                                            fit: BoxFit.cover
+                                          ),
+                                          borderRadius: BorderRadius.circular(4),
+                                          boxShadow: [BoxShadow(blurRadius: 11, color: Color.fromRGBO(192, 192, 192, 0.5), offset: Offset(0, 2))],
+                                          gradient: LinearGradient(colors: [Color.fromRGBO(234, 189, 176, 1), Color. fromRGBO(243, 110, 34, .5)], begin: Alignment.centerLeft, end: Alignment.centerRight)
+                                        ),
                                         child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
                                           children: <Widget>[
                                             Container(
-                                              width: 44,
-                                              alignment: FractionalOffset.centerLeft,
-                                              child: Image.asset(goodDetai.courseModuleList[_currentSeries].lessonList[index].isWatch == 1 ? 'assets/images/goodDetail/icon_course_state_play.png' : 'assets/images/goodDetail/icon_course_state_lock.png', width: 23, height: 23, fit: BoxFit.cover,),
+                                              width: 21,
+                                              height: 27,
+                                              margin: EdgeInsets.only(left: 9, right: 10),
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(index == _currentSeries ? 'assets/images/goodDetail/icon_course_flag_sel.png': 'assets/images/goodDetail/icon_course_flag_unsel.png')
+                                                )
+                                              ),
+                                              alignment: FractionalOffset.center,
+                                              child: Text((index + 1).toString(), style: TextStyle(color: index == _currentSeries ? Colors.white : Color.fromRGBO(153, 153, 153, 1), fontSize: 13),),
                                             ),
                                             Expanded(
                                               flex: 1,
                                               child: Container(
-                                                  decoration: BoxDecoration(
-                                                    border: Border(bottom: BorderSide(color: Color.fromRGBO(221, 221, 221, 1), width: 0.5))
-                                                  ),
-                                                  child: Padding(
-                                                    padding: EdgeInsets.symmetric(vertical: 12),
-                                                    child: Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: <Widget>[
-                                                        Expanded(
-                                                          flex: 1,
-                                                          child: Container(
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: <Widget>[
-                                                              Container(
-                                                                margin: EdgeInsets.only(bottom: 3),
-                                                                child: Text(goodDetai.courseModuleList[_currentSeries].lessonList[index].courseName, style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1)), maxLines: 2,),
-                                                              ),
-                                                              Row(
-                                                                children: <Widget>[
-                                                                  Image.asset(goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate == 0 ? 'assets/images/goodDetail/icon_play_status_unplay.png' : 'assets/images/goodDetail/icon_play_status_play.png', width: 9, height: 10, fit: BoxFit.cover,),
-                                                                  Container(child: Text(goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate != 0 ? '已学习' + goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate.toString() + '%' : '未开始', style: TextStyle(color: goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate == 0 ? Color.fromRGBO(153, 153, 153, 1) : Color.fromRGBO(243, 110, 34, 1), fontSize: 12),), margin: EdgeInsets.only(left: 4),)
-                                                                ],
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        ),
-                                                        Container(
-                                                          width: 56,
-                                                          margin: EdgeInsets.only(left: 20),
-                                                          child: Row(
-                                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                                            children: <Widget>[
-                                                              Container(
-                                                                width: 1,
-                                                                height: 28,
-                                                                decoration: BoxDecoration(
-                                                                  color: Color.fromRGBO(229, 229, 229, 1)
-                                                                ),
-                                                              ),
-                                                              Expanded(
-                                                                flex: 1,
-                                                                child: Column(
-                                                                  children: <Widget>[
-                                                                    ClipOval(
-                                                                      child: goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherAvatarUrl != null
-                                                                      ? ExtendedImage.network(
-                                                                        goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherAvatarUrl,
-                                                                        cache: true,
-                                                                        enableLoadState: false,
-                                                                        fit: BoxFit.cover,
-                                                                        width: 28, 
-                                                                        height: 28
-                                                                      ) : Image.asset('assets/images/goodDetail/icon_course_teacher_default_photo.png', width: 28, height: 28),
-                                                                    ),
-                                                                    Container(
-                                                                      margin: EdgeInsets.only(top: 2),
-                                                                      child: Text(goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherName != null ? goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherName : 'IEA', style: TextStyle(fontSize: 12, color: Color.fromRGBO(51, 51, 51, 1)), maxLines: 1,),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                  
-                                                ),
+                                                margin: EdgeInsets.only(right: 2),
+                                                child: Text(goodDetai.courseModuleList[index].moduleName, style: TextStyle(fontSize: 13, color: index == _currentSeries ? Colors.white : Color.fromRGBO(153, 153, 153, 1)), maxLines: 2, overflow: TextOverflow.ellipsis,),
+                                              )
                                             )
                                           ],
                                         ),
                                       )
                                     );
                                   }
-                                )
-                              )
-                            ),
-                          ),
-                          Opacity(
-                            opacity: goodDetai.courseModuleList[_currentSeries].lessonList.length <= 4 ? 0 : 1,
-                            child: GestureDetector(
-                              onTap: () {
-                                  this.setState((){
-                                    _dropDown = !_dropDown;
-                                  });
-                              },
-                              child: Container(
-                                height: 55,
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Text(_dropDown ? '立即收起' : '展开更多', style: TextStyle(color: Color.fromRGBO(255, 93, 0, 1), fontSize: 11)),
-                                    Container(child: Image.asset(_dropDown ? 'assets/images/goodDetail/icon_course_top_arrow.png' : 'assets/images/goodDetail/icon_course_bottom_arrow.png', width: 9, height: 5, fit: BoxFit.cover,), margin: EdgeInsets.only(left: 3))
-                                  ],
                                 ),
                               ),
+                            ),
+                            Opacity(
+                              opacity: goodDetai.courseModuleList.length > 0 ? 1 : 0,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 15),
+                                child: Container(
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: _dropDown ? goodDetai.courseModuleList[_currentSeries].lessonList.length : goodDetai.courseModuleList[_currentSeries].lessonList.length > 4 ? 4 : goodDetai.courseModuleList[_currentSeries].lessonList.length,
+                                    physics: ScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          if (goodDetai.courseModuleList[_currentSeries].lessonList[index].isWatch == 2) return;
+                                          print(goodDetai.goodsId);
+                                          print(goodDetai.courseModuleList[_currentSeries].lessonList[index].videoId);
+                                          print(goodDetai.courseModuleList[_currentSeries].lessonList[index].moduleLessonId);
+                                          Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
+                                            return PlayerPage(goodsId: goodDetai.goodsId, videoId: goodDetai.courseModuleList[_currentSeries].lessonList[index].videoId, moduleLessonId: goodDetai.courseModuleList[_currentSeries].lessonList[index].moduleLessonId,);
+                                          }));
+                                        },
+                                        child: Container(
+                                          child: Row(
+                                            children: <Widget>[
+                                              Container(
+                                                width: 44,
+                                                alignment: FractionalOffset.centerLeft,
+                                                child: Image.asset(goodDetai.courseModuleList[_currentSeries].lessonList[index].isWatch == 1 ? 'assets/images/goodDetail/icon_course_state_play.png' : 'assets/images/goodDetail/icon_course_state_lock.png', width: 23, height: 23, fit: BoxFit.cover,),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                      border: Border(bottom: BorderSide(color: Color.fromRGBO(221, 221, 221, 1), width: 0.5))
+                                                    ),
+                                                    child: Padding(
+                                                      padding: EdgeInsets.symmetric(vertical: 12),
+                                                      child: Row(
+                                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                        children: <Widget>[
+                                                          Expanded(
+                                                            flex: 1,
+                                                            child: Container(
+                                                            child: Column(
+                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                              children: <Widget>[
+                                                                Container(
+                                                                  margin: EdgeInsets.only(bottom: 3),
+                                                                  child: Text(goodDetai.courseModuleList[_currentSeries].lessonList[index].courseName, style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1)), maxLines: 2,),
+                                                                ),
+                                                                Row(
+                                                                  children: <Widget>[
+                                                                    Image.asset(goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate == 0 ? 'assets/images/goodDetail/icon_play_status_unplay.png' : 'assets/images/goodDetail/icon_play_status_play.png', width: 9, height: 10, fit: BoxFit.cover,),
+                                                                    Container(child: Text(goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate != 0 ? '已学习' + goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate.toString() + '%' : '未开始', style: TextStyle(color: goodDetai.courseModuleList[_currentSeries].lessonList[index].learnRate == 0 ? Color.fromRGBO(153, 153, 153, 1) : Color.fromRGBO(243, 110, 34, 1), fontSize: 12),), margin: EdgeInsets.only(left: 4),)
+                                                                  ],
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                          ),
+                                                          Container(
+                                                            width: 56,
+                                                            margin: EdgeInsets.only(left: 20),
+                                                            child: Row(
+                                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                                              children: <Widget>[
+                                                                Container(
+                                                                  width: 1,
+                                                                  height: 28,
+                                                                  decoration: BoxDecoration(
+                                                                    color: Color.fromRGBO(229, 229, 229, 1)
+                                                                  ),
+                                                                ),
+                                                                Expanded(
+                                                                  flex: 1,
+                                                                  child: Column(
+                                                                    children: <Widget>[
+                                                                      ClipOval(
+                                                                        child: goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherAvatarUrl != null
+                                                                        ? ExtendedImage.network(
+                                                                          goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherAvatarUrl,
+                                                                          cache: true,
+                                                                          enableLoadState: false,
+                                                                          fit: BoxFit.cover,
+                                                                          width: 28, 
+                                                                          height: 28
+                                                                        ) : Image.asset('assets/images/goodDetail/icon_course_teacher_default_photo.png', width: 28, height: 28),
+                                                                      ),
+                                                                      Container(
+                                                                        margin: EdgeInsets.only(top: 2),
+                                                                        child: Text(goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherName != null ? goodDetai.courseModuleList[_currentSeries].lessonList[index].teacherName : 'IEA', style: TextStyle(fontSize: 12, color: Color.fromRGBO(51, 51, 51, 1)), maxLines: 1,),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    )
+                                                    
+                                                  ),
+                                              )
+                                            ],
+                                          ),
+                                        )
+                                      );
+                                    }
+                                  )
+                                )
+                              ),
+                            ),
+                            Opacity(
+                              opacity: goodDetai.courseModuleList[_currentSeries].lessonList.length <= 4 ? 0 : 1,
+                              child: GestureDetector(
+                                onTap: () {
+                                    this.setState((){
+                                      _dropDown = !_dropDown;
+                                    });
+                                },
+                                child: Container(
+                                  height: 55,
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Text(_dropDown ? '立即收起' : '展开更多', style: TextStyle(color: Color.fromRGBO(255, 93, 0, 1), fontSize: 11)),
+                                      Container(child: Image.asset(_dropDown ? 'assets/images/goodDetail/icon_course_top_arrow.png' : 'assets/images/goodDetail/icon_course_bottom_arrow.png', width: 9, height: 5, fit: BoxFit.cover,), margin: EdgeInsets.only(left: 3))
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ),
+                            
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: Container(
+                                alignment: FractionalOffset.centerLeft,
+                                child: Text('课程介绍', style: TextStyle(fontSize: 19, color: Color.fromRGBO(51, 51, 51, 1), fontWeight: FontWeight.w500)),
+                              )
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 15),
+                              child: Html(
+                              data: goodDetai.courseContent == null ? '<p></p>' : goodDetai.courseContent
                             )
-                          ),
-                          
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Container(
-                              alignment: FractionalOffset.centerLeft,
-                              child: Text('课程介绍', style: TextStyle(fontSize: 19, color: Color.fromRGBO(51, 51, 51, 1), fontWeight: FontWeight.w500)),
                             )
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: 15),
-                            child: Html(
-                            data: goodDetai.courseContent == null ? '<p></p>' : goodDetai.courseContent
-                          )
-                          )
-                        ],
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.white
-                            // color: response.data.bottomStatus == '3' ? Colors.transparent : Colors.white
-                          ),
-                          child: ConsultAndPlay(isBuied: goodDetai.bottomStatus.toString() == '4', isOn: goodDetai.bottomStatus.toString() == '3', goodDetail: goodDetai)
+                          ],
                         ),
-                      )
-                    ],
-                  ) 
-                );
-              } else {
-              return ErrorPage();
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white
+                              // color: response.data.bottomStatus == '3' ? Colors.transparent : Colors.white
+                            ),
+                            child: ConsultAndPlay(isBuied: goodDetai.bottomStatus.toString() == '4', isOn: goodDetai.bottomStatus.toString() == '3', goodDetail: goodDetai)
+                          ),
+                        )
+                      ],
+                    ) 
+                  );
+                } else {
+                return ErrorPage();
+              }
+            } else {
+              return LoadingPage();
             }
-          } else {
-            return LoadingPage();
           }
-        }
+        )
       )
+      
       
     );
   }

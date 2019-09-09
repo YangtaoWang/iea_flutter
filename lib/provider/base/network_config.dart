@@ -65,4 +65,7 @@ class NetworkConfig {
   static final Map<String, String> goodDetailPageApi = {
     'goodDetail': hostUrl + 'course/goodsDetail'
   };
+  static final Map<String, String> playerPageApi = {
+    'playerData': hostUrl + 'course/goodsPlay'
+  };
 }

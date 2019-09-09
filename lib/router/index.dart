@@ -15,13 +15,15 @@ import 'package:iea/screens/splashPage/guidePage.dart';
 import 'package:iea/screens/splashPage/webView.dart';
 import 'package:iea/screens/openDetailPage/openDetail_page.dart';
 import 'package:iea/screens/goodDetailPage/goodDetai_page.dart';
+import 'package:iea/screens/splashPage/web.dart';
+import 'package:iea/screens/test/testPage.dart';
 
 final routes = {
   '/courseExam': (context)=> CourseExamPage(isExaming: true, currentPage: 0),
   '/courseExamAnswer': (context)=> CourseExamResultPage(),
   // '/detail': (context)=> CourseDetailPage(num: 1),
   '/feedback': (context)=> FeedbackPage(),
-  '/player': (context) => PlayerPage(),
+  '/player': (context) => PlayerPage(goodsId: 0, videoId: 0, moduleLessonId: 0),
   '/phone': (context) => PhonePage(),
   '/my': (context) => MyPage(),
   '/login': (context) => LoginPage(phone: ''),
@@ -33,5 +35,7 @@ final routes = {
   '/guide': (context) => GuidePage(),
   '/webView': (context) => WebViewPage(url: ''),
   '/openDetail': (context) => OpenDetailPage(openClassId: '',),
-  '/goodDetail': (context) => GoodDetailPage(goodsId: '',)
+  '/goodDetail': (context) => GoodDetailPage(goodsId: '',),
+  '/web': (context) => WebPage(url: '', fromPage: '',),
+  '/test': (context) => TestPage(),
 };

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:iea/models/indexPage_models/index_openCourse_model.dart';
 import 'package:extended_image/extended_image.dart';
+import 'package:iea/screens/splashPage/web.dart';
 import 'package:iea/screens/splashPage/webView.dart';
 
 class MainBanner extends StatefulWidget {
@@ -60,7 +61,7 @@ class _IndexSwiperState extends State<IndexSwiper> {
       },
       onTap: (index) {
         Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
-          return WebViewPage(url: widget.indexBannerList[index].linkUrl);
+          return WebPage(url: widget.indexBannerList[index].linkUrl, fromPage: 'main',);
         }));
       },// 点击事件 onTap
       pagination: SwiperPagination( // 分页指示器
