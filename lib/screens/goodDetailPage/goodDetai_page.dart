@@ -481,7 +481,7 @@ class _ConsultAndPlayState extends State<ConsultAndPlay> {
             flex: 1,
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, '/player');
+                // Navigator.pushNamed(context, '/player');
               },
               child: Container(
                 height: 52,

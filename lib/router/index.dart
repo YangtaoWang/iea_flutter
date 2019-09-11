@@ -1,6 +1,7 @@
 import 'package:iea/screens/courseExamPage/courseExam_page.dart';
 import 'package:iea/screens/courseExamResultPage/courseExamResult_page.dart';
 import 'package:iea/screens/feedbackPage/feedback_page.dart';
+import 'package:iea/screens/openPlayerPage/openPlayer_page.dart';
 import 'package:iea/screens/playerPage/player_page.dart';
 import 'package:iea/screens/phonePage/phone_page.dart';
 import 'package:iea/screens/loginPage/login_page.dart';
@@ -37,5 +38,6 @@ final routes = {
   '/openDetail': (context) => OpenDetailPage(openClassId: '',),
   '/goodDetail': (context) => GoodDetailPage(goodsId: '',),
   '/web': (context) => WebPage(url: '', fromPage: '',),
+  '/openPlayer': (context) => OpenPlayer(openClassId: '',),
   '/test': (context) => TestPage(),
 };
