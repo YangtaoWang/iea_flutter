@@ -4,7 +4,8 @@ class SP {
     'userInfo': 'Map',
     'a': 'String',
     'authorization': 'String',
-    'DeviceInfo': 'Map'
+    'DeviceInfo': 'Map',
+    'firstInstall': 'String'
   };
   /*
    * 存储数据

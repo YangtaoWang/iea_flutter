@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:iea/sp/index.dart';
 class FirstPage extends StatefulWidget {
   FirstPage({Key key}) : super(key: key);
 
@@ -11,16 +12,22 @@ class _FirstPageState extends State<FirstPage> {
   int clock = 3;
   bool isClock = true;
   Timer timer;
+
   _startClock () { // 开启定时器
     setState(() {isClock = true;});
     int time = 3;
     timer?.cancel();
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) async{
       setState(() {clock = time;});
       time --;
       if (time < 0) {
         timer.cancel();
-        Navigator.pushReplacementNamed(context, '/guide');
+        if(await SP().getData('firstInstall') == null) {
+          Navigator.pushReplacementNamed(context, '/guide');
+          SP().saveData('firstInstall', '1');
+        } else {
+          Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => route == null);
+        }
       }
     });
   }
@@ -57,9 +64,15 @@ class _FirstPageState extends State<FirstPage> {
                 top: 38,
                 right: 17,
                 child: GestureDetector(
-                  onTap: () {
+                  onTap: () async{
                     timer?.cancel();
-                    Navigator.pushReplacementNamed(context, '/guide');
+                    if(await SP().getData('firstInstall') == null) {
+                      Navigator.pushReplacementNamed(context, '/guide');
+                      SP().saveData('firstInstall', '1');
+                    } else {
+                      Navigator.pushNamedAndRemoveUntil(context, "/home", (route) => route == null);
+                    }
+                    // Navigator.pushReplacementNamed(context, '/guide');
                   },
                   child: Container(
                     alignment: FractionalOffset.center,

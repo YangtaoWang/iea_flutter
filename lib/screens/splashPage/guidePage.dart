@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:iea/screens/splashPage/web.dart';
-import 'package:iea/screens/splashPage/webView.dart';
+// import 'package:iea/screens/splashPage/webView.dart';
 // import 'package:extended_image/extended_image.dart';
 
 class GuidePage extends StatefulWidget {
