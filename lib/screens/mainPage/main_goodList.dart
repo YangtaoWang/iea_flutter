@@ -27,11 +27,11 @@ class _MainGoodListState extends State<MainGoodList> with AutomaticKeepAliveClie
                 alignment: FractionalOffset.centerLeft,
                 child: Text('IEA认证项目', style: TextStyle(color: Color.fromRGBO(25, 25, 25, 1), fontSize: 17, fontWeight: FontWeight.w500)),
                 ),
-                widget.indexMenuClassList[0].bannerUrl == null || widget.indexMenuClassList[0].bannerUrl == '' ? Container() :
+                widget.indexMenuClassList[0].bannerUrl == null || widget.indexMenuClassList.first.bannerUrl == '' ? Container() :
                 GestureDetector(
                   onTap: () {
                     Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context){
-                      return GoodDetailPage(goodsId: widget.indexMenuClassList[0].goId);
+                      return GoodDetailPage(goodsId: widget.indexMenuClassList.first.goId);
                     }));
                   },
                   child: Container(

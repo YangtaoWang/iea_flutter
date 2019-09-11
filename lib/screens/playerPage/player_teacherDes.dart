@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iea/utils/screen_util.dart';
-class TeacherDes extends StatelessWidget{
+import 'package:iea/models/playerPage_modles/player_model.dart';
+class TeacherDes extends StatefulWidget {
+  final PlayerModle player;
+  TeacherDes({Key key, @required this.player}) : super(key: key);
+  _TeacherDesState createState() => _TeacherDesState();
+}
+
+class _TeacherDesState extends State<TeacherDes>{
   @override 
   Widget build(BuildContext context){
     ScreenUtil.instance = ScreenUtil(width: 375)..init(context);
@@ -32,7 +39,13 @@ class TeacherDes extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 ClipOval(
-                  child: Image.asset('assets/images/courseExamAnswerPage/resultBg3.png',
+                  child: widget.player == null 
+                  ?Image.asset('assets/images/courseExamAnswerPage/resultBg3.png',
+                    width: 42,
+                    height: 42,
+                    fit: BoxFit.cover,
+                  )
+                  :Image.network(widget.player.avatarUrl,
                     width: 42,
                     height: 42,
                     fit: BoxFit.cover,
@@ -49,12 +62,13 @@ class TeacherDes extends StatelessWidget{
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 10),
-                  child: Text('吴双', style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1), fontSize: 18, fontWeight: FontWeight.w500),)
+                  child: Text(widget.player != null ? widget.player.teacherName : '', style: TextStyle(color: Color.fromRGBO(51, 51, 51, 1), fontSize: 18, fontWeight: FontWeight.w500),)
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 10),
-                  child: Text('Wu Shuang', style: TextStyle(color: Color.fromRGBO(102, 102, 102, 1), fontSize: 14),)
-                )
+
+                // Container(
+                //   margin: EdgeInsets.only(left: 10),
+                //   child: Text('Wu Shuang', style: TextStyle(color: Color.fromRGBO(102, 102, 102, 1), fontSize: 14),)
+                // )
                 
               ],
             ),
@@ -72,7 +86,7 @@ class TeacherDes extends StatelessWidget{
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(width: 2, color: Color.fromRGBO(243, 114, 40, 0.36))
                     ),
-                    child: Text('1981年2月出生于上海，中共党员。复旦大学哲学系博士，加拿大温哥华UBC大学Regent College访问学者。2005年2月-2008年6月在复旦大学哲学系基督教哲学专业2005年2月-2008年6月在复旦大学哲学系基督教哲学专业', style: TextStyle(color: Color.fromRGBO(154, 133, 128, 1), fontSize: 14, height: 1.1),)
+                    child: Text(widget.player != null ? widget.player.introduce : '', style: TextStyle(color: Color.fromRGBO(154, 133, 128, 1), fontSize: 14, height: 1.1),)
                   ),
                   Positioned(
                     left: 0,

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:iea/provider/base/base_resp.dart';
 import 'package:iea/screens/playerPage/player_teacherDes.dart';
 import 'package:iea/screens/playerPage/player_courseService.dart';
 import 'package:chewie/chewie.dart';
+import 'package:iea/sp/index.dart';
+import 'package:iea/widgets/error.dart';
+import 'package:iea/widgets/loading.dart';
 import 'package:video_player/video_player.dart';
 import 'package:iea/blocs/playerPage_blocs/player_bloc.dart';
+import 'package:iea/models/playerPage_modles/player_model.dart';
+import 'package:iea/provider/resource/playerPage_api_provider.dart';
 class PlayerPage extends StatefulWidget {
   final int goodsId;
   final int videoId;
@@ -13,27 +19,47 @@ class PlayerPage extends StatefulWidget {
 }
 
 class _PlayerPageState extends State<PlayerPage> {
-  static VideoPlayerController videoPlayerController = VideoPlayerController.network('https://xszx-prod-1251987637.cos.ap-beijing.myqcloud.com/%E5%9B%BD%E9%99%85%E8%90%A5%E5%85%BB%E5%B8%88.mp4');
-  final chewieController = ChewieController(
-    videoPlayerController: videoPlayerController,
-    aspectRatio: 16 / 9,
-    autoPlay: !true,
-    looping: false,
-    placeholder: Image.network('https://xszx-test-1251987637.cosbj.myqcloud.com/file/20190614/fe82d65bf5464498b389632f82197983.png')
-  );
+  PlayerModle player;
+  VideoPlayerController videoPlayerController;
+  ChewieController chewieController;
   int currentTab = 1;
-   PlayerBloc _bloc = PlayerBloc();
-  _getPlayer(){
-    Map<String, dynamic> params = {'goodsId': widget.goodsId, 'videoId': widget.videoId, 'moduleLessonId': widget.moduleLessonId};
-    print(widget.goodsId);
-    print(widget.videoId);
-    print(widget.moduleLessonId);
-    _bloc.getPlayer(params);
+  _getPlayer() async{
+    Map<String, String> params = {'goodsId': widget.goodsId.toString(), 'videoId': widget.videoId.toString(), 'moduleLessonId': widget.moduleLessonId.toString()};
+    // _bloc.getPlayer(params);
+    BaseResp data = await PlayerPageApiProvider().getPlayer(params);
+    if (data.code == 200) {
+      setState(() {
+        player = PlayerModle.fromJson(data.data);
+      });
+    }
+
+  }
+  // _initVideo(){
+  //   videoPlayerController = VideoPlayerController.network(player.videoUrl);
+  //   chewieController = ChewieController(
+  //     videoPlayerController: videoPlayerController,
+  //     aspectRatio: 16 / 9,
+  //     autoPlay: !true,
+  //     looping: false,
+  //     placeholder: Image.network(player.videoCover)
+  //   );
+  // }
+  // @override 
+  void deactivate() async{
+    if(await SP().getData('a') != null){ // 避免401跳转时，循环调用
+      _getPlayer();
+    }
+    super.deactivate();
   }
   @override
   void initState() {
-    // _getPlayer();
+    _getPlayer();
+    // _initVideo();
     super.initState();
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -53,9 +79,17 @@ class _PlayerPageState extends State<PlayerPage> {
               decoration: BoxDecoration(
                 // color: Color.fromRGBO(51, 51, 51, .3)
               ),
-              child: new Chewie(
-                controller: chewieController
-              ),
+              child: player != null 
+              ? new Chewie(
+                controller: ChewieController(
+                  videoPlayerController: VideoPlayerController.network(player.videoUrl),
+                  aspectRatio: 16 / 9,
+                  autoPlay: !true,
+                  looping: false,
+                  placeholder: Image.network(player.videoCover == null ? 'https://xszx-test-1251987637.cosbj.myqcloud.com/file/20190614/fe82d65bf5464498b389632f82197983.png': player.videoCover)
+                )
+              )
+              : Container()
             ),
             Container(
               height: 50,
@@ -136,7 +170,7 @@ class _PlayerPageState extends State<PlayerPage> {
             ),
             Expanded(
               flex: 1,
-              child: currentTab == 1 ? TeacherDes() : CourseService()
+              child: currentTab == 1 ? TeacherDes(player: player,) : CourseService()
             )
           ],
         ),
