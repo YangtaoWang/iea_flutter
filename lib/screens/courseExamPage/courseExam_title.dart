@@ -56,10 +56,10 @@ class CourseExamTitleState extends State<CourseExamTitle>{
                 ),
                 Positioned(
                   left: 0,
-                  top: 1,
+                  top: 0,
                   child: Container(
                     width: 58,
-                    height: 21,
+                    height: 17,
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(243, 110, 34, 1),
                       borderRadius: BorderRadius.only(topLeft: Radius.circular(10),topRight: Radius.circular(10),bottomRight: Radius.circular(10),),

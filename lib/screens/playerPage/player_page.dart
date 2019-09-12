@@ -44,7 +44,7 @@ class _PlayerPageState extends State<PlayerPage> {
   //     placeholder: Image.network(player.videoCover)
   //   );
   // }
-  // @override 
+  @override 
   void deactivate() async{
     if(await SP().getData('a') != null){ // 避免401跳转时，循环调用
       _getPlayer();
@@ -81,17 +81,17 @@ class _PlayerPageState extends State<PlayerPage> {
               decoration: BoxDecoration(
                 // color: Color.fromRGBO(51, 51, 51, .3)
               ),
-              child: player != null 
-              ? new Chewie(
-                controller: ChewieController(
-                  videoPlayerController: VideoPlayerController.network(player.videoUrl),
-                  aspectRatio: 16 / 9,
-                  autoPlay: !true,
-                  looping: false,
-                  placeholder: Image.network(player.videoCover == null ? 'https://xszx-test-1251987637.cosbj.myqcloud.com/file/20190614/fe82d65bf5464498b389632f82197983.png': player.videoCover)
-                )
-              )
-              : Container()
+              // child: player != null 
+              // ? new Chewie(
+              //   controller: ChewieController(
+              //     videoPlayerController: VideoPlayerController.network(player.videoUrl),
+              //     aspectRatio: 16 / 9,
+              //     autoPlay: !true,
+              //     looping: false,
+              //     placeholder: Image.network(player.videoCover == null ? 'https://xszx-test-1251987637.cosbj.myqcloud.com/file/20190614/fe82d65bf5464498b389632f82197983.png': player.videoCover)
+              //   )
+              // )
+              // : Container()
             ),
             Container(
               height: 50,
