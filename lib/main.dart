@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:iea/screens/minepage/mine_screen.dart';
 // import 'package:iea/screens/goodDetailPage/goodDetai_page.dart';
 import 'package:iea/screens/splashPage/firstPage.dart';
+import 'package:iea/screens/test/testPage.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:iea/redux/index.dart';
@@ -24,17 +26,35 @@ import 'package:iea/utils/service_locator.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 // import 'package:iea/screens/test/testPage.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
+import 'package:http/http.dart' as http;
 
 // import 'models/loginPage_models/iosDeviceInfo_model.dart';
 
 
-void main() {
+void main() async{
   // store.dispatch(LoginSuccessAction(token: 'new asfasfasfToken'));
   setupLocator();
   // _initJPush();
   initPlatformState();
+  await readFont('https://xszx-test-1251987637.cos.ap-beijing.myqcloud.com/SourceHanSerifCN-SemiBold.otf');
   runApp(MyApp(store));
 }
+// 自定义字体加载
+Future<void> readFont(String path) async {
+  var fontLoader = FontLoader("Montserrat");
+  fontLoader.addFont(fetchFont(path));
+  await fontLoader.load();
+}
+Future<ByteData> fetchFont(path) async {
+  final response = await http.get(path);
+  if (response.statusCode == 200) {
+    return ByteData.view(response.bodyBytes.buffer);
+  } else {
+    // If that call was not successful, throw an error.
+    throw Exception('Failed to load font');
+  }
+}
+
 Future<void> initPlatformState() async {
   JPush jpush = new JPush();
   jpush.setAlias("iostest").then((map) {
@@ -120,8 +140,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Colors.white
         ),
-        // home: TestPage(),
-        home: FirstPage(),
+        home: TestPage(),
+        // home: FirstPage(),
         routes: routes,
       )
     );

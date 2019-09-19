@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         // 顶栏
         appBar: AppBar(
-          title: _currentIndex != 2 ? Text(widgetNames[_currentIndex], style: TextStyle(color: Colors.black),) : Text(''),
+          title: _currentIndex != 2 ? Text(widgetNames[_currentIndex], style: TextStyle(color: Colors.black, fontFamily: 'SiYuan'),) : Text(''),
           backgroundColor: _currentIndex != 2 ? Colors.white : Color.fromRGBO(243, 110, 34, 1),
           elevation: 0,
           centerTitle: true,

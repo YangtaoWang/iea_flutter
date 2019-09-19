@@ -4,10 +4,10 @@ import 'package:iea/screens/playerPage/player_teacherDes.dart';
 import 'package:iea/screens/playerPage/player_courseService.dart';
 import 'package:chewie/chewie.dart';
 import 'package:iea/sp/index.dart';
-import 'package:iea/widgets/error.dart';
-import 'package:iea/widgets/loading.dart';
+// import 'package:iea/widgets/error.dart';
+// import 'package:iea/widgets/loading.dart';
 import 'package:video_player/video_player.dart';
-import 'package:iea/blocs/playerPage_blocs/player_bloc.dart';
+// import 'package:iea/blocs/playerPage_blocs/player_bloc.dart';
 import 'package:iea/models/playerPage_modles/player_model.dart';
 import 'package:iea/provider/resource/playerPage_api_provider.dart';
 class PlayerPage extends StatefulWidget {

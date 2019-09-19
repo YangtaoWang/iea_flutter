@@ -11,7 +11,7 @@ class Action{
   Action({this.type});
 }
 
-/// 定义Login成功action
+/// 定义Login成功action, 需要外部传参
 class LoginSuccessAction extends Action{
   final String token;
   LoginSuccessAction({this.token}) : super(type: AppActions.LoginSuccess);

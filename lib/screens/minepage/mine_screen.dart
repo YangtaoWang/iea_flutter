@@ -56,15 +56,15 @@ class _MineScreenState extends State<MineScreen>
                 );
               },
             ),
-            // StoreConnector<AppState, String>(
-            //   // converter: (store) => store.state.globalState.token,
-            //   builder: (context, token) {
-            //     return Text(
-            //       token.toString(),
-            //       style: Theme.of(context).textTheme.display1,
-            //     );
-            //   },
-            // ),
+            StoreConnector<AppState, String>(
+              converter: (store) => store.state.auth.token,
+              builder: (context, token) {
+                return Text(
+                  token.toString(),
+                  style: Theme.of(context).textTheme.display1,
+                );
+              },
+            ),
           ],
         ),
       ),
